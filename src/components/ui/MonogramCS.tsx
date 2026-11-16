@@ -8,12 +8,12 @@ export function BrandWordmark({ className }: BrandWordmarkProps) {
   return (
     <span
       className={cn(
-        'inline-flex items-baseline font-display text-lg font-bold tracking-[-0.045em] text-text-primary sm:text-xl',
+        'inline-flex items-baseline font-display text-lg font-bold tracking-[-0.045em] text-current sm:text-xl',
         className
       )}
     >
       <span>CSE</span>
-      <span className="text-accent" aria-hidden="true">
+      <span className="text-cobalt" aria-hidden="true">
         .
       </span>
     </span>

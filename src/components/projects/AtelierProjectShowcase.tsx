@@ -6,14 +6,14 @@ import { ProjectCoverIllustration } from '@/components/projects/ProjectCoverIllu
 function ProjectCover({ project }: { project: FlagshipProject }) {
   if (project.coverImage) {
     return (
-      <div className="overflow-hidden rounded-lg border border-editorial-borderLight bg-stone p-2">
+      <div className="overflow-hidden rounded-lg bg-ivory p-2">
         <div className="relative aspect-[16/10] w-full overflow-hidden rounded bg-white">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={project.coverImage.src}
             alt={project.coverImage.alt}
             loading="lazy"
-            className="h-full w-full object-contain transition-transform duration-500 ease-out group-hover:scale-[1.015]"
+            className="h-full w-full object-contain transition-transform duration-300 ease-out group-hover:scale-[1.015]"
           />
         </div>
       </div>
@@ -27,25 +27,28 @@ function ProjectCover({ project }: { project: FlagshipProject }) {
   return null;
 }
 
-function ProjectMetaLinks({ project }: { project: FlagshipProject }) {
+function ProjectLinks({ project }: { project: FlagshipProject }) {
   return (
-    <div className="mt-6 flex flex-wrap items-center gap-5 border-t border-editorial-borderLight pt-5">
+    <div className="mt-6 flex flex-wrap items-center gap-6 border-t border-ruleLight pt-5">
       <Link
         href={`/proyectos/${project.slug}`}
-        className="inline-flex items-center gap-1.5 text-sm font-semibold text-ink transition-colors hover:text-cobalt"
+        className="group/link inline-flex items-center gap-1.5 text-sm font-semibold text-ink transition-colors hover:text-cobalt"
       >
         <span>Ver caso de estudio</span>
-        <ArrowUpRight className="h-4 w-4 text-cobalt" aria-hidden="true" />
+        <ArrowUpRight
+          className="h-4 w-4 text-cobalt transition-transform duration-200 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5"
+          aria-hidden="true"
+        />
       </Link>
 
       <a
         href={project.repoUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-1.5 text-xs font-medium text-editorial-inkMuted transition-colors hover:text-ink"
+        className="inline-flex items-center gap-1.5 text-xs font-medium text-mutedLight transition-colors hover:text-ink"
       >
         <GitBranch className="h-3.5 w-3.5 text-cobalt" aria-hidden="true" />
-        <span>GitHub</span>
+        <span>Repositorio</span>
       </a>
 
       {project.liveDemoUrl && (
@@ -55,7 +58,7 @@ function ProjectMetaLinks({ project }: { project: FlagshipProject }) {
           rel="noopener noreferrer"
           className="inline-flex items-center gap-1 text-xs font-medium text-cobalt transition-colors hover:text-cobalt-hover"
         >
-          <span>Demo</span>
+          <span>Abrir demo</span>
           <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
         </a>
       )}
@@ -76,202 +79,252 @@ export function AtelierProjectShowcase({
         {projects.map((project) => (
           <article
             key={project.slug}
-            className="group flex flex-col justify-between rounded-2xl border border-editorial-borderLight bg-white p-6 shadow-atelier sm:p-7"
+            className="group flex flex-col justify-between rounded-2xl bg-white p-6 shadow-editorialLight transition-shadow duration-300 hover:shadow-xl sm:p-7"
           >
             <div>
               <ProjectCover project={project} />
               <div className="mt-5 flex items-center justify-between gap-2">
-                <span className="font-mono text-xs font-medium text-cobalt">
+                <span className="font-mono text-xs font-semibold text-cobalt">
                   {project.indexLabel}
                 </span>
-                <span className="text-xs text-editorial-inkMuted">
-                  {project.editorialSubtitle}
-                </span>
+                <span className="text-xs text-mutedLight">{project.editorialSubtitle}</span>
               </div>
               {project.recognitionBadge && (
                 <div className="mt-3">
-                  <span className="inline-flex items-center gap-1.5 rounded-md bg-cobalt/10 px-2.5 py-1 text-xs font-semibold text-cobalt">
+                  <span className="inline-flex items-center gap-1.5 rounded bg-cobalt/10 px-2.5 py-1 text-xs font-semibold text-cobalt">
                     <Award className="h-3.5 w-3.5" aria-hidden="true" />
                     <span>{project.recognitionBadge}</span>
                   </span>
                 </div>
               )}
-              <h3 className="mt-3 font-display text-2xl font-semibold tracking-tight text-ink">
+              <h3 className="type-h3 mt-3 font-display font-semibold text-ink">
                 <Link href={`/proyectos/${project.slug}`} className="hover:text-cobalt">
                   {project.name}
                 </Link>
               </h3>
-              <p className="mt-2.5 text-sm leading-relaxed text-editorial-inkMuted">
+              <p className="mt-2.5 text-sm leading-relaxed text-mutedLight">
                 {project.tagline}
               </p>
               <div className="mt-4 flex flex-wrap gap-1.5">
                 {project.previewTags.slice(0, 3).map((tag) => (
                   <span
                     key={tag}
-                    className="rounded border border-editorial-borderLight bg-ivory px-2.5 py-1 text-xs font-medium text-ink"
+                    className="rounded bg-ivory px-2.5 py-1 text-xs font-medium text-ink"
                   >
                     {tag}
                   </span>
                 ))}
               </div>
             </div>
-            <ProjectMetaLinks project={project} />
+            <ProjectLinks project={project} />
           </article>
         ))}
       </div>
     );
   }
 
-  const [first, second, third, fourth, ...rest] = projects;
+  const [vasoChain, mineSafe, yakuAlert, establo, ...remaining] = projects;
 
   return (
-    <div className="space-y-10 lg:space-y-14">
-      {/* 01 — Protagonista horizontal (VasoChainAI) */}
-      {first && (
-        <article className="group grid items-center gap-8 rounded-2xl border border-editorial-borderLight bg-white p-6 shadow-atelier sm:p-8 lg:grid-cols-12 lg:gap-12 lg:p-10">
-          <div className="lg:col-span-7">
-            <ProjectCover project={first} />
+    <div className="space-y-12 lg:space-y-16">
+      {/* BLOQUE 1: PROTAGONISTA — VasoChainAI */}
+      {vasoChain && (
+        <article className="group grid items-center gap-8 rounded-2xl bg-white p-5 shadow-editorialLight sm:p-9 lg:grid-cols-12 lg:gap-12 lg:p-11">
+          <div className="min-w-0 lg:col-span-7">
+            <ProjectCover project={vasoChain} />
           </div>
-          <div className="lg:col-span-5">
+          <div className="min-w-0 lg:col-span-5">
             <div className="flex items-center gap-3">
               <span className="font-mono text-sm font-semibold text-cobalt">
-                {first.indexLabel}
+                {vasoChain.indexLabel}
               </span>
-              <span className="h-px w-6 bg-editorial-borderLight" aria-hidden="true" />
-              <span className="text-xs font-medium uppercase tracking-wider text-editorial-inkMuted">
-                Proyecto protagonista
+              <span className="h-px w-6 bg-ruleLight" aria-hidden="true" />
+              <span className="text-xs font-medium uppercase tracking-wider text-mutedLight">
+                Proyecto destacado
               </span>
             </div>
 
-            {first.recognitionBadge && (
+            {vasoChain.recognitionBadge && (
               <div className="mt-4">
-                <span className="inline-flex items-center gap-1.5 rounded-md bg-cobalt/10 px-3 py-1 text-xs font-semibold text-cobalt">
+                <span className="inline-flex items-center gap-1.5 rounded bg-cobalt/10 px-3 py-1.5 text-xs font-semibold text-cobalt">
                   <Award className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-                  <span>{first.recognitionBadge}</span>
+                  <span>{vasoChain.recognitionBadge}</span>
                 </span>
               </div>
             )}
 
-            <h3 className="mt-4 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
-              <Link href={`/proyectos/${first.slug}`} className="transition-colors hover:text-cobalt">
-                {first.name}
+            <h3 className="type-h2 mt-4 font-display font-semibold text-ink">
+              <Link
+                href={`/proyectos/${vasoChain.slug}`}
+                className="transition-colors hover:text-cobalt"
+              >
+                {vasoChain.name}
               </Link>
             </h3>
 
-            <p className="mt-3 text-base leading-relaxed text-editorial-inkMuted">
-              {first.tagline}
-            </p>
+            <p className="type-body mt-4 text-mutedLight">{vasoChain.tagline}</p>
 
-            <div className="mt-5 flex flex-wrap gap-2">
-              {first.previewTags.slice(0, 3).map((tag) => (
+            <div className="mt-6 flex flex-wrap gap-2">
+              {vasoChain.previewTags.slice(0, 3).map((tag) => (
                 <span
                   key={tag}
-                  className="rounded border border-editorial-borderLight bg-ivory px-3 py-1 text-xs font-medium text-ink"
+                  className="rounded bg-ivory px-3 py-1 text-xs font-medium text-ink"
                 >
                   {tag}
                 </span>
               ))}
             </div>
 
-            <ProjectMetaLinks project={first} />
+            <ProjectLinks project={vasoChain} />
           </div>
         </article>
       )}
 
-      {/* 02 y 03 — Dos columnas asimétricas (MineSafe 3D y YAKU ALERT) */}
-      {(second || third) && (
-        <div className="grid gap-8 lg:grid-cols-2">
-          {[second, third].filter(Boolean).map((project) => (
-            <article
-              key={project.slug}
-              className="group flex flex-col justify-between rounded-2xl border border-editorial-borderLight bg-white p-6 shadow-atelier sm:p-8"
-            >
+      {/* BLOQUE 2: DOS PROYECTOS DESTACADOS CON COMPOSICIONES DISTINTAS (MineSafe 3D & YAKU ALERT) */}
+      {(mineSafe || yakuAlert) && (
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
+          {mineSafe && (
+            <article className="group flex min-w-0 flex-col justify-between rounded-2xl bg-carbon p-5 text-white shadow-editorialDark sm:p-8 lg:col-span-7">
               <div>
-                <ProjectCover project={project} />
+                <ProjectCover project={mineSafe} />
                 <div className="mt-6 flex items-center gap-3">
                   <span className="font-mono text-sm font-semibold text-cobalt">
-                    {project.indexLabel}
+                    {mineSafe.indexLabel}
                   </span>
-                  <span className="h-px w-5 bg-editorial-borderLight" aria-hidden="true" />
-                  <span className="text-xs text-editorial-inkMuted">
-                    {project.editorialSubtitle}
-                  </span>
+                  <span className="h-px w-5 bg-ruleDark" aria-hidden="true" />
+                  <span className="text-xs text-mutedDark">{mineSafe.editorialSubtitle}</span>
                 </div>
-                <h3 className="mt-3 font-display text-2xl font-semibold tracking-tight text-ink">
-                  <Link href={`/proyectos/${project.slug}`} className="transition-colors hover:text-cobalt">
-                    {project.name}
+                <h3 className="type-h3 mt-3 font-display font-semibold text-white">
+                  <Link
+                    href={`/proyectos/${mineSafe.slug}`}
+                    className="transition-colors hover:text-cobalt"
+                  >
+                    {mineSafe.name}
                   </Link>
                 </h3>
-                <p className="mt-2.5 text-sm leading-relaxed text-editorial-inkMuted sm:text-base">
-                  {project.tagline}
+                <p className="mt-2.5 text-sm leading-relaxed text-mutedDark sm:text-base">
+                  {mineSafe.tagline}
                 </p>
                 <div className="mt-5 flex flex-wrap gap-2">
-                  {project.previewTags.slice(0, 3).map((tag) => (
+                  {mineSafe.previewTags.slice(0, 3).map((tag) => (
                     <span
                       key={tag}
-                      className="rounded border border-editorial-borderLight bg-ivory px-2.5 py-1 text-xs font-medium text-ink"
+                      className="rounded bg-white/[0.07] px-2.5 py-1 text-xs font-medium text-white"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
               </div>
-              <ProjectMetaLinks project={project} />
+              <div className="mt-6 flex flex-wrap items-center gap-6 border-t border-ruleDark pt-5">
+                <Link
+                  href={`/proyectos/${mineSafe.slug}`}
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-white transition-colors hover:text-cobalt"
+                >
+                  <span>Ver caso de estudio</span>
+                  <ArrowUpRight className="h-4 w-4 text-cobalt" aria-hidden="true" />
+                </Link>
+                <a
+                  href={mineSafe.repoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs font-medium text-mutedDark transition-colors hover:text-white"
+                >
+                  <GitBranch className="h-3.5 w-3.5 text-cobalt" aria-hidden="true" />
+                  <span>Repositorio</span>
+                </a>
+              </div>
             </article>
-          ))}
+          )}
+
+          {yakuAlert && (
+            <article className="group flex min-w-0 flex-col justify-between rounded-2xl bg-white p-5 shadow-editorialLight sm:p-8 lg:col-span-5">
+              <div>
+                <ProjectCover project={yakuAlert} />
+                <div className="mt-6 flex items-center gap-3">
+                  <span className="font-mono text-sm font-semibold text-cobalt">
+                    {yakuAlert.indexLabel}
+                  </span>
+                  <span className="h-px w-5 bg-ruleLight" aria-hidden="true" />
+                  <span className="text-xs text-mutedLight">{yakuAlert.editorialSubtitle}</span>
+                </div>
+                <h3 className="type-h3 mt-3 font-display font-semibold text-ink">
+                  <Link
+                    href={`/proyectos/${yakuAlert.slug}`}
+                    className="transition-colors hover:text-cobalt"
+                  >
+                    {yakuAlert.name}
+                  </Link>
+                </h3>
+                <p className="mt-2.5 text-sm leading-relaxed text-mutedLight sm:text-base">
+                  {yakuAlert.tagline}
+                </p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {yakuAlert.previewTags.slice(0, 3).map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded bg-ivory px-2.5 py-1 text-xs font-medium text-ink"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <ProjectLinks project={yakuAlert} />
+            </article>
+          )}
         </div>
       )}
 
-      {/* 04 — Protagonista invertido con UI real (Establo AI Leads) */}
-      {fourth && (
-        <article className="group grid items-center gap-8 rounded-2xl border border-editorial-borderLight bg-stone/70 p-6 sm:p-8 lg:grid-cols-12 lg:gap-12 lg:p-10">
-          <div className="lg:order-2 lg:col-span-7">
-            <ProjectCover project={fourth} />
+      {/* BLOQUE 3: INTERFAZ REAL DE PRODUCTO EN ANCHO COMPLETO (Establo AI Leads) */}
+      {establo && (
+        <article className="group grid items-center gap-8 rounded-2xl bg-white p-5 shadow-editorialLight sm:p-9 lg:grid-cols-12 lg:gap-12 lg:p-10">
+          <div className="min-w-0 lg:order-2 lg:col-span-7">
+            <ProjectCover project={establo} />
           </div>
-          <div className="lg:order-1 lg:col-span-5">
+          <div className="min-w-0 lg:order-1 lg:col-span-5">
             <div className="flex items-center gap-3">
               <span className="font-mono text-sm font-semibold text-cobalt">
-                {fourth.indexLabel}
+                {establo.indexLabel}
               </span>
-              <span className="h-px w-6 bg-editorial-borderLight" aria-hidden="true" />
-              <span className="text-xs text-editorial-inkMuted">
-                {fourth.editorialSubtitle}
-              </span>
+              <span className="h-px w-6 bg-ruleLight" aria-hidden="true" />
+              <span className="text-xs text-mutedLight">{establo.editorialSubtitle}</span>
             </div>
 
-            <h3 className="mt-4 font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
-              <Link href={`/proyectos/${fourth.slug}`} className="transition-colors hover:text-cobalt">
-                {fourth.name}
+            <h3 className="type-h3 mt-4 font-display font-semibold text-ink">
+              <Link
+                href={`/proyectos/${establo.slug}`}
+                className="transition-colors hover:text-cobalt"
+              >
+                {establo.name}
               </Link>
             </h3>
 
-            <p className="mt-3 text-sm leading-relaxed text-editorial-inkMuted sm:text-base">
-              {fourth.tagline}
-            </p>
+            <p className="type-body mt-3 text-mutedLight">{establo.tagline}</p>
 
             <div className="mt-5 flex flex-wrap gap-2">
-              {fourth.previewTags.slice(0, 3).map((tag) => (
+              {establo.previewTags.slice(0, 3).map((tag) => (
                 <span
                   key={tag}
-                  className="rounded border border-editorial-borderLight bg-white px-2.5 py-1 text-xs font-medium text-ink"
+                  className="rounded bg-ivory px-2.5 py-1 text-xs font-medium text-ink"
                 >
                   {tag}
                 </span>
               ))}
             </div>
 
-            <ProjectMetaLinks project={fourth} />
+            <ProjectLinks project={establo} />
           </div>
         </article>
       )}
 
-      {/* 05 y 06 — Fila editorial de dos columnas */}
-      {rest.length > 0 && (
-        <div className="grid gap-8 lg:grid-cols-2">
-          {rest.map((project) => (
+      {/* BLOQUE 4: DOS COLUMNAS REFINADAS (Caso16 & Egresados System) */}
+      {remaining.length > 0 && (
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+          {remaining.map((project) => (
             <article
               key={project.slug}
-              className="group flex flex-col justify-between rounded-2xl border border-editorial-borderLight bg-white p-6 shadow-atelier sm:p-8"
+              className="group flex min-w-0 flex-col justify-between rounded-2xl bg-white p-5 shadow-editorialLight sm:p-8"
             >
               <div>
                 <ProjectCover project={project} />
@@ -279,31 +332,32 @@ export function AtelierProjectShowcase({
                   <span className="font-mono text-sm font-semibold text-cobalt">
                     {project.indexLabel}
                   </span>
-                  <span className="h-px w-5 bg-editorial-borderLight" aria-hidden="true" />
-                  <span className="text-xs text-editorial-inkMuted">
-                    {project.editorialSubtitle}
-                  </span>
+                  <span className="h-px w-5 bg-ruleLight" aria-hidden="true" />
+                  <span className="text-xs text-mutedLight">{project.editorialSubtitle}</span>
                 </div>
-                <h3 className="mt-3 font-display text-2xl font-semibold tracking-tight text-ink">
-                  <Link href={`/proyectos/${project.slug}`} className="transition-colors hover:text-cobalt">
+                <h3 className="type-h3 mt-3 font-display font-semibold text-ink">
+                  <Link
+                    href={`/proyectos/${project.slug}`}
+                    className="transition-colors hover:text-cobalt"
+                  >
                     {project.name}
                   </Link>
                 </h3>
-                <p className="mt-2.5 text-sm leading-relaxed text-editorial-inkMuted sm:text-base">
+                <p className="mt-2.5 text-sm leading-relaxed text-mutedLight sm:text-base">
                   {project.tagline}
                 </p>
                 <div className="mt-5 flex flex-wrap gap-2">
                   {project.previewTags.slice(0, 3).map((tag) => (
                     <span
                       key={tag}
-                      className="rounded border border-editorial-borderLight bg-ivory px-2.5 py-1 text-xs font-medium text-ink"
+                      className="rounded bg-ivory px-2.5 py-1 text-xs font-medium text-ink"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
               </div>
-              <ProjectMetaLinks project={project} />
+              <ProjectLinks project={project} />
             </article>
           ))}
         </div>

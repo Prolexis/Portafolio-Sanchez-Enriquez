@@ -28,18 +28,18 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${profile.fullName} — Software con propósito. Inteligencia aplicada.`,
+    default: `${profile.fullName} — Signature Engineering`,
     template: `%s | ${profile.monogram}`,
   },
-  description: profile.heroSubheadline,
+  description: profile.heroSubtitle,
   keywords: [
     'Cristhian Alexis Sánchez Enríquez',
     'Cristhian Sánchez',
     'Prolexis',
     'Ingeniería de Sistemas UNT',
-    'Software e Inteligencia Artificial',
+    'Full-Stack',
+    'Inteligencia Artificial',
     'VasoChainAI',
-    'Next.js TypeScript Python',
   ],
   authors: [{ name: profile.fullName, url: profile.githubUrl }],
   creator: profile.fullName,
@@ -51,8 +51,8 @@ export const metadata: Metadata = {
     locale: 'es_PE',
     url: SITE_URL,
     siteName: `${profile.monogram} ${profile.shortName}`,
-    title: `${profile.fullName} — Software con propósito. Inteligencia aplicada.`,
-    description: profile.heroSubheadline,
+    title: `${profile.fullName} — Código que resuelve. Ideas que evolucionan.`,
+    description: profile.heroSubtitle,
     images: [
       {
         url: absoluteUrl(profile.portraitPath),
@@ -64,8 +64,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${profile.fullName} — Software con propósito. Inteligencia aplicada.`,
-    description: profile.heroSubheadline,
+    title: `${profile.fullName} — Signature Engineering`,
+    description: profile.heroSubtitle,
     images: [absoluteUrl(profile.portraitPath)],
   },
 };
@@ -97,17 +97,17 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       lang="es"
       className={`${inter.variable} ${manrope.variable} ${jetbrainsMono.variable}`}
     >
-      <body className="min-h-screen bg-obsidian font-sans text-white antialiased">
+      <body className="min-h-screen bg-carbon font-sans text-white antialiased">
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-cobalt focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-cobalt focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
         >
           Saltar al contenido principal
         </a>
 
-        <div className="relative flex min-h-screen flex-col">
+        <div className="relative flex min-h-screen w-full max-w-full flex-col overflow-x-clip">
           <Navbar />
-          <main id="main-content" className="flex-1">
+          <main id="main-content" className="w-full min-w-0 flex-1">
             {children}
           </main>
           <Footer />

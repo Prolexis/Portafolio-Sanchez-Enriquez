@@ -22,13 +22,13 @@ export function ProjectVisualGallery({
         {visuals.map((visual) => (
           <figure
             key={visual.src}
-            className="obsidian-surface overflow-hidden rounded-xl p-3 sm:p-4"
+            className="overflow-hidden rounded-xl bg-white p-3 shadow-editorialLight sm:p-4"
           >
             <button
               type="button"
               onClick={() => setActiveVisual(visual)}
               aria-label={`Ampliar captura: ${visual.caption}`}
-              className="group relative flex aspect-[16/10] w-full items-center justify-center overflow-hidden rounded-lg border border-border-subtle bg-[#06080B]"
+              className="group relative flex aspect-[16/10] w-full items-center justify-center overflow-hidden rounded-lg bg-ivory"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -36,12 +36,12 @@ export function ProjectVisualGallery({
                 alt={visual.alt}
                 className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-[1.015]"
               />
-              <span className="absolute right-2.5 top-2.5 inline-flex items-center gap-1 rounded border border-border-strong bg-bg/90 px-2.5 py-1 font-mono text-[11px] font-medium text-text-primary backdrop-blur-sm transition-colors group-hover:border-accent/50">
-                <Expand className="h-3 w-3 text-accent" aria-hidden="true" />
+              <span className="absolute right-2.5 top-2.5 inline-flex items-center gap-1 rounded bg-carbon/90 px-2.5 py-1 font-mono text-[11px] font-medium text-white">
+                <Expand className="h-3 w-3 text-cobalt" aria-hidden="true" />
                 <span>Ampliar</span>
               </span>
             </button>
-            <figcaption className="mt-3 px-1 text-xs leading-relaxed text-text-secondary">
+            <figcaption className="mt-3 px-1 text-xs leading-relaxed text-mutedLight">
               {visual.caption}
             </figcaption>
           </figure>

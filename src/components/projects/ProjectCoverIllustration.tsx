@@ -1,69 +1,62 @@
-import { CheckCircle2, CloudRain, FileText, ShieldCheck } from 'lucide-react';
+import { CheckCircle2, CloudRain, Compass, ShieldCheck } from 'lucide-react';
 import type { CoverVisualKind } from '@/data/projects';
 
 export function ProjectCoverIllustration({ kind }: { kind: CoverVisualKind }) {
   if (kind === 'vasochain-product') {
     return (
-      <div className="relative flex aspect-[16/10] w-full flex-col justify-between overflow-hidden rounded-lg bg-carbon p-5 text-white sm:p-7">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -right-14 -top-14 h-56 w-56 rounded-full bg-cobalt/20 blur-3xl"
-        />
-
-        <div className="relative flex items-center justify-between gap-2">
-          <span className="inline-flex items-center gap-1.5 text-xs font-medium text-white/80">
-            <ShieldCheck className="h-4 w-4 text-cobalt-soft" aria-hidden="true" />
-            <span>Trazabilidad Vaso de Leche</span>
-          </span>
-          <span className="rounded bg-white/10 px-2 py-0.5 font-mono text-[10px] text-editorial-muted">
+      <div className="relative flex min-h-[250px] w-full flex-col justify-between overflow-hidden rounded-lg bg-carbon p-4 text-white sm:aspect-[16/10] sm:p-7">
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2">
+            <span className="inline-flex h-7 w-7 items-center justify-center rounded bg-cobalt/20 text-cobalt">
+              <ShieldCheck className="h-4 w-4" aria-hidden="true" />
+            </span>
+            <span className="text-xs font-semibold tracking-tight text-white">
+              VasoChainAI · Supervisión de Entregas
+            </span>
+          </div>
+          <span className="font-mono text-[10px] text-mutedDark">
             Ilustración conceptual
           </span>
         </div>
 
-        <div className="relative my-auto grid gap-3 sm:grid-cols-3">
-          <div className="rounded-lg border border-white/10 bg-white/[0.04] p-3.5">
-            <p className="font-mono text-[10px] uppercase tracking-wider text-cobalt-soft">
-              01 · Evidencia
+        {/* Composición tipo UI de producto: comprobante + registro verificable */}
+        <div className="my-auto grid gap-4 sm:grid-cols-12">
+          <div className="rounded-lg bg-[#171D28] p-4 sm:col-span-5">
+            <p className="font-mono text-[10px] uppercase tracking-wider text-cobalt">
+              Canal de campo · WhatsApp
             </p>
-            <p className="mt-1.5 font-display text-sm font-semibold text-white">
-              Reporte WhatsApp
+            <p className="mt-2 text-sm font-semibold text-white">
+              Evidencia fotográfica recibida
             </p>
-            <p className="mt-1 text-[11px] text-editorial-muted">
-              Foto de entrega recibida desde punto municipal
-            </p>
+            <div className="mt-3 flex items-center gap-2 rounded bg-carbon/80 px-3 py-2 text-xs text-emerald-400">
+              <CheckCircle2 className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+              <span>Validado con Claude Vision</span>
+            </div>
           </div>
 
-          <div className="rounded-lg border border-cobalt/40 bg-cobalt/15 p-3.5">
-            <p className="font-mono text-[10px] uppercase tracking-wider text-white">
-              02 · Validación IA
-            </p>
-            <p className="mt-1.5 font-display text-sm font-semibold text-white">
-              Claude Vision
-            </p>
-            <p className="mt-1 text-[11px] text-white/80">
-              Verificación automática de ración y beneficiario
-            </p>
-          </div>
-
-          <div className="rounded-lg border border-white/10 bg-white/[0.04] p-3.5">
-            <p className="font-mono text-[10px] uppercase tracking-wider text-emerald-400">
-              03 · Sello on-chain
-            </p>
-            <p className="mt-1.5 font-display text-sm font-semibold text-white">
-              DeliveryRegistry
-            </p>
-            <p className="mt-1 text-[11px] text-editorial-muted">
-              Hash inmutable auditable en contrato inteligente
-            </p>
+          <div className="rounded-lg bg-white p-4 text-ink sm:col-span-7">
+            <div className="flex items-center justify-between border-b border-ruleLight pb-2.5">
+              <span className="text-xs font-semibold">Acta de Entrega #PVL-0412</span>
+              <span className="rounded bg-emerald-100 px-2 py-0.5 font-mono text-[10px] font-semibold text-emerald-800">
+                SELLADO ON-CHAIN
+              </span>
+            </div>
+            <div className="mt-3 space-y-2 text-xs text-mutedLight">
+              <div className="flex justify-between">
+                <span>Beneficiario verificado</span>
+                <span className="font-medium text-ink">Comité Sector 04</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Contrato inteligente</span>
+                <span className="font-mono text-[11px] text-cobalt">DeliveryRegistry.sol</span>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="relative flex items-center justify-between border-t border-white/10 pt-3 text-[11px] text-editorial-muted">
-          <span className="inline-flex items-center gap-1.5 text-emerald-400">
-            <CheckCircle2 className="h-3.5 w-3.5" aria-hidden="true" />
-            <span>Auditoría verificable de extremo a extremo</span>
-          </span>
-          <span className="hidden font-mono sm:inline">Syscoin Hackathon · 2026</span>
+        <div className="flex items-center justify-between border-t border-ruleDark pt-3 text-[11px] text-mutedDark">
+          <span>Trazabilidad de asistencia alimentaria</span>
+          <span className="font-mono text-white/80">3.er lugar nacional · 2026</span>
         </div>
       </div>
     );
@@ -73,52 +66,72 @@ export function ProjectCoverIllustration({ kind }: { kind: CoverVisualKind }) {
     return (
       <div className="relative flex aspect-[16/10] w-full flex-col justify-between overflow-hidden rounded-lg bg-carbon p-5 text-white sm:p-6">
         <div className="flex items-center justify-between gap-2">
-          <span className="text-xs font-medium text-white/85">
-            Gemelo Digital 3D · Proximidad de Flota
+          <span className="text-xs font-semibold text-white">
+            MineSafe 3D · Escena Tajo Abierto WebGL
           </span>
-          <span className="rounded bg-white/10 px-2 py-0.5 font-mono text-[10px] text-editorial-muted">
-            Ilustración conceptual
+          <span className="font-mono text-[10px] text-mutedDark">
+            Ilustración conceptual · 3D
           </span>
         </div>
 
-        <div className="relative mx-auto my-auto flex w-full max-w-sm items-center justify-center py-2">
-          <svg viewBox="0 0 320 150" className="h-auto w-full" aria-hidden="true">
-            <ellipse
-              cx="160"
-              cy="85"
-              rx="128"
-              ry="48"
-              fill="none"
-              stroke="rgba(255,255,255,0.12)"
-              strokeDasharray="4 4"
-            />
-            <ellipse
-              cx="160"
-              cy="85"
-              rx="86"
-              ry="32"
-              fill="none"
-              stroke="rgba(63,99,232,0.5)"
-              strokeWidth="1.5"
-            />
-            <ellipse
-              cx="160"
-              cy="85"
-              rx="42"
-              ry="16"
-              fill="rgba(63,99,232,0.18)"
-              stroke="#7399FF"
-              strokeWidth="1.5"
-            />
-            <circle cx="160" cy="85" r="5" fill="#FFFFFF" />
-            <circle cx="225" cy="70" r="5" fill="#7399FF" />
-            <line x1="165" y1="84" x2="220" y2="71" stroke="#7399FF" strokeWidth="1.5" />
-          </svg>
+        {/* Terrazas isométricas mineras + detección espacial de proximidad */}
+        <div className="relative my-auto grid items-center gap-4 sm:grid-cols-12">
+          <div className="sm:col-span-8">
+            <svg viewBox="0 0 340 165" className="h-auto w-full" aria-hidden="true">
+              {/* Terrazas concéntricas estilo tajo abierto */}
+              <polygon
+                points="170,18 320,76 170,148 20,76"
+                fill="#151B25"
+                stroke="#2D3440"
+                strokeWidth="1.2"
+              />
+              <polygon
+                points="170,36 278,78 170,130 62,78"
+                fill="#192130"
+                stroke="#2D3440"
+                strokeWidth="1.2"
+              />
+              <polygon
+                points="170,54 236,80 170,112 104,80"
+                fill="#1F2A3E"
+                stroke="#4568EC"
+                strokeOpacity="0.6"
+                strokeWidth="1.2"
+              />
+              {/* Vehículo autónomo y camión manual + vector de proximidad */}
+              <rect x="132" y="72" width="14" height="9" rx="2" fill="#FFFFFF" />
+              <rect x="200" y="80" width="14" height="9" rx="2" fill="#4568EC" />
+              <line
+                x1="146"
+                y1="76"
+                x2="200"
+                y2="84"
+                stroke="#4568EC"
+                strokeDasharray="3 3"
+                strokeWidth="1.6"
+              />
+              <circle cx="139" cy="76" r="22" fill="none" stroke="#4568EC" strokeOpacity="0.35" />
+            </svg>
+          </div>
+
+          <div className="space-y-2 rounded-lg bg-[#171D28] p-3.5 text-xs sm:col-span-4">
+            <p className="font-mono text-[10px] uppercase tracking-wider text-cobalt">
+              Telemetría TreeSHAP
+            </p>
+            <div>
+              <p className="text-[11px] text-mutedDark">Distancia LiDAR</p>
+              <p className="font-mono text-sm font-semibold text-white">0.337 impacto</p>
+            </div>
+            <div>
+              <p className="text-[11px] text-mutedDark">Velocidad GNSS</p>
+              <p className="font-mono text-sm font-semibold text-white">0.120 impacto</p>
+            </div>
+          </div>
         </div>
 
-        <div className="flex items-center justify-between border-t border-white/10 pt-3 text-[11px] text-editorial-muted">
-          <span>Escena WebGL Three.js + Explicabilidad TreeSHAP</span>
-          <span className="font-mono text-cobalt-soft">Simulación</span>
+        <div className="flex items-center justify-between border-t border-ruleDark pt-3 text-[11px] text-mutedDark">
+          <span>Flota mixta simulada · Three.js + FastAPI</span>
+          <span className="font-mono text-cobalt">Simulación XAI</span>
         </div>
       </div>
     );
@@ -126,39 +139,60 @@ export function ProjectCoverIllustration({ kind }: { kind: CoverVisualKind }) {
 
   if (kind === 'yaku-map') {
     return (
-      <div className="relative flex aspect-[16/10] w-full flex-col justify-between overflow-hidden rounded-lg bg-carbon p-5 text-white sm:p-6">
+      <div className="relative flex aspect-[16/10] w-full flex-col justify-between overflow-hidden rounded-lg bg-[#E9ECEF] p-5 text-ink sm:p-6">
         <div className="flex items-center justify-between gap-2">
-          <span className="inline-flex items-center gap-1.5 text-xs font-medium text-white/85">
-            <CloudRain className="h-4 w-4 text-cobalt-soft" aria-hidden="true" />
-            <span>Trujillo · Corredores Hídricos UNT</span>
+          <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-ink">
+            <CloudRain className="h-4 w-4 text-cobalt" aria-hidden="true" />
+            <span>YAKU ALERT · Monitoreo Trujillo & UNT</span>
           </span>
-          <span className="rounded bg-white/10 px-2 py-0.5 font-mono text-[10px] text-editorial-muted">
-            Ilustración conceptual
+          <span className="font-mono text-[10px] text-mutedLight">
+            Ilustración conceptual · Mapa
           </span>
         </div>
 
-        <div className="relative my-auto py-2">
-          <svg viewBox="0 0 320 130" className="h-auto w-full" aria-hidden="true">
-            <path
-              d="M15 95 C 75 80, 120 40, 185 52 C 235 60, 265 30, 305 26"
-              fill="none"
-              stroke="#3F63E8"
-              strokeWidth="2.5"
-            />
-            <path
-              d="M15 112 C 95 100, 145 70, 210 78 C 250 82, 275 62, 305 56"
-              fill="none"
-              stroke="rgba(255,255,255,0.16)"
-              strokeDasharray="4 4"
-            />
-            <circle cx="185" cy="52" r="5" fill="#7399FF" />
-            <circle cx="185" cy="52" r="14" fill="rgba(115,153,255,0.18)" />
-          </svg>
+        {/* Cartografía de monitoreo hidrometeorológico */}
+        <div className="my-auto grid items-center gap-4 sm:grid-cols-12">
+          <div className="rounded-lg bg-white p-2 shadow-sm sm:col-span-8">
+            <svg viewBox="0 0 300 130" className="h-auto w-full" aria-hidden="true">
+              <rect width="300" height="130" rx="6" fill="#F4F2ED" />
+              {/* Retícula vial urbana */}
+              <line x1="0" y1="45" x2="300" y2="45" stroke="#DADDE3" strokeWidth="1" />
+              <line x1="0" y1="90" x2="300" y2="90" stroke="#DADDE3" strokeWidth="1" />
+              <line x1="90" y1="0" x2="90" y2="130" stroke="#DADDE3" strokeWidth="1" />
+              <line x1="210" y1="0" x2="210" y2="130" stroke="#DADDE3" strokeWidth="1" />
+              {/* Corredor hídrico y zona UNT */}
+              <path
+                d="M12 108 C 74 96, 128 54, 194 58 C 240 60, 270 36, 292 22"
+                fill="none"
+                stroke="#4568EC"
+                strokeWidth="3.5"
+                strokeLinecap="round"
+              />
+              <circle cx="152" cy="68" r="18" fill="rgba(69,104,236,0.14)" />
+              <circle cx="152" cy="68" r="5.5" fill="#4568EC" />
+              <text x="164" y="84" fill="#171C25" fontSize="9" fontWeight="600">
+                Campus UNT
+              </text>
+            </svg>
+          </div>
+
+          <div className="space-y-2.5 rounded-lg bg-white p-3.5 text-xs shadow-sm sm:col-span-4">
+            <div className="flex items-center gap-1.5 font-semibold text-ink">
+              <Compass className="h-3.5 w-3.5 text-cobalt" aria-hidden="true" />
+              <span>Estado preventivo</span>
+            </div>
+            <p className="text-[11px] leading-relaxed text-mutedLight">
+              Corredores hídricos y escenarios diferenciados de pronóstico.
+            </p>
+            <span className="inline-block rounded bg-ivory px-2 py-1 font-mono text-[10px] text-ink">
+              Ley N.° 29664
+            </span>
+          </div>
         </div>
 
-        <div className="flex items-center justify-between border-t border-white/10 pt-3 text-[11px] text-editorial-muted">
-          <span>Cartografía Leaflet · Monitoreo y Respuesta</span>
-          <span className="font-mono">Ley N.° 29664</span>
+        <div className="flex items-center justify-between border-t border-ruleLight pt-3 text-[11px] text-mutedLight">
+          <span>Leaflet + Shapely · Open-Meteo</span>
+          <span className="font-mono">Innova Norte 3G</span>
         </div>
       </div>
     );
@@ -167,31 +201,30 @@ export function ProjectCoverIllustration({ kind }: { kind: CoverVisualKind }) {
   return (
     <div className="relative flex aspect-[16/10] w-full flex-col justify-between overflow-hidden rounded-lg bg-carbon p-5 text-white sm:p-6">
       <div className="flex items-center justify-between gap-2">
-        <span className="inline-flex items-center gap-1.5 text-xs font-medium text-white/85">
-          <FileText className="h-4 w-4 text-cobalt-soft" aria-hidden="true" />
-          <span>Portal de Egresados y CV PDF</span>
-        </span>
-        <span className="rounded bg-white/10 px-2 py-0.5 font-mono text-[10px] text-editorial-muted">
-          Ilustración conceptual
-        </span>
+        <span className="text-xs font-semibold text-white">Egresados System · Portal</span>
+        <span className="font-mono text-[10px] text-mutedDark">Ilustración conceptual</span>
       </div>
 
-      <div className="my-auto grid grid-cols-3 gap-2.5">
-        <div className="col-span-2 rounded-lg border border-white/10 bg-white/[0.04] p-3">
-          <p className="font-display text-xs font-semibold text-white">Perfil Profesional</p>
-          <p className="mt-1 text-[11px] text-editorial-muted">
-            Seguimiento laboral, ofertas y estado de empleabilidad
-          </p>
+      <div className="my-auto rounded-lg bg-white p-4 text-ink">
+        <div className="flex items-center justify-between border-b border-ruleLight pb-2.5">
+          <span className="font-display text-sm font-semibold">EgresadosNet</span>
+          <span className="font-mono text-[11px] text-cobalt">Vercel Live</span>
         </div>
-        <div className="rounded-lg border border-cobalt/40 bg-cobalt/15 p-3">
-          <p className="font-mono text-[10px] text-cobalt-soft">PDF</p>
-          <p className="mt-1 text-[11px] font-medium text-white">CV Generado</p>
+        <div className="mt-3 grid grid-cols-2 gap-3 text-xs">
+          <div className="rounded bg-ivory p-2.5">
+            <p className="text-[11px] text-mutedLight">Vinculación</p>
+            <p className="mt-0.5 font-semibold">Seguimiento laboral</p>
+          </div>
+          <div className="rounded bg-ivory p-2.5">
+            <p className="text-[11px] text-mutedLight">Exportación</p>
+            <p className="mt-0.5 font-semibold">CV PDF asíncrono</p>
+          </div>
         </div>
       </div>
 
-      <div className="flex items-center justify-between border-t border-white/10 pt-3 text-[11px] text-editorial-muted">
-        <span>Acceso autenticado en Vercel</span>
-        <span className="font-mono text-cobalt-soft">/auth/login</span>
+      <div className="flex items-center justify-between border-t border-ruleDark pt-3 text-[11px] text-mutedDark">
+        <span>Monorepo Next.js + NestJS + tRPC</span>
+        <span className="font-mono text-cobalt">/auth/login</span>
       </div>
     </div>
   );

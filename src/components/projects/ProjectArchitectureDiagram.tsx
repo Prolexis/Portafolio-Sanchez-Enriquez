@@ -98,11 +98,9 @@ const diagramData: Record<
 
 export function ProjectArchitectureDiagram({
   kind,
-  compact = false,
   className,
 }: {
   kind: ArchitectureDiagramKind;
-  compact?: boolean;
   className?: string;
 }) {
   const data = diagramData[kind];
@@ -117,44 +115,39 @@ export function ProjectArchitectureDiagram({
   return (
     <div
       className={cn(
-        'flex h-full flex-col justify-between rounded-lg border border-border-subtle bg-bg p-4 sm:p-6',
+        'flex flex-col justify-between rounded-xl bg-white p-5 text-ink shadow-editorialLight sm:p-7',
         className
       )}
     >
-      <div className="mb-4 flex flex-wrap items-center justify-between gap-2 border-b border-border-subtle pb-3">
-        <div className="flex items-center gap-2 text-xs font-medium text-text-primary">
-          <Icon className="h-4 w-4 shrink-0 text-accent" aria-hidden="true" />
+      <div className="mb-5 flex flex-wrap items-center justify-between gap-2 border-b border-ruleLight pb-3">
+        <div className="flex items-center gap-2 text-xs font-semibold text-ink">
+          <Icon className="h-4 w-4 shrink-0 text-cobalt" aria-hidden="true" />
           <span>{data.header}</span>
         </div>
-        <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-text-muted">
-          Arquitectura conceptual
+        <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-mutedLight">
+          Arquitectura técnica
         </span>
       </div>
 
-      <div
-        className={cn(
-          'grid gap-3',
-          compact ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1 sm:grid-cols-2'
-        )}
-      >
+      <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-4">
         {data.nodes.map((node, index) => (
           <div
             key={node.title}
-            className="flex flex-col justify-between rounded-md border border-border-subtle bg-bg-elevated p-3.5"
+            className="flex flex-col justify-between rounded-lg bg-ivory p-4"
           >
             <div>
               <div className="flex items-center justify-between gap-2">
-                <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-accent">
+                <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-cobalt">
                   0{index + 1} · {node.tag}
                 </span>
                 {index < data.nodes.length - 1 && (
-                  <ArrowRight className="h-3 w-3 text-text-muted" aria-hidden="true" />
+                  <ArrowRight className="h-3 w-3 text-mutedLight" aria-hidden="true" />
                 )}
               </div>
-              <p className="mt-1.5 font-display text-sm font-semibold text-text-primary">
+              <p className="mt-2 font-display text-sm font-semibold text-ink">
                 {node.title}
               </p>
-              <p className="mt-1 text-xs leading-relaxed text-text-secondary">
+              <p className="mt-1 text-xs leading-relaxed text-mutedLight">
                 {node.subtitle}
               </p>
             </div>
@@ -162,11 +155,9 @@ export function ProjectArchitectureDiagram({
         ))}
       </div>
 
-      {!compact && (
-        <p className="mt-4 border-t border-border-subtle/70 pt-3 font-mono text-[11px] text-text-muted">
-          {data.caption}
-        </p>
-      )}
+      <p className="mt-5 border-t border-ruleLight pt-3 font-mono text-[11px] text-mutedLight">
+        {data.caption}
+      </p>
     </div>
   );
 }

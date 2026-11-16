@@ -5,30 +5,31 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    background-color: #0b0d12;
+    background-color: #10141b;
     color: #ffffff;
   }
 
+  html,
   body {
-    background-color: #0b0d12;
+    background-color: #10141b;
     color: #ffffff;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   ::selection {
-    background-color: rgba(63, 99, 232, 0.24);
+    background-color: rgba(69, 104, 236, 0.24);
     color: inherit;
   }
 
   :focus-visible {
-    outline: 2px solid #3f63e8;
+    outline: 2px solid #4568ec;
     outline-offset: 3px;
     border-radius: 4px;
   }
 }
 
-.atelier-container {
+.signature-container {
   width: 100%;
   max-width: 1320px;
   margin-left: auto;
@@ -37,16 +38,38 @@
   padding-right: clamp(1.25rem, 3.5vw, 3rem);
 }
 
-.atelier-hero-title {
-  font-size: clamp(2.35rem, 4.9vw, 4.35rem);
-  line-height: 1.03;
-  letter-spacing: -0.032em;
+.type-display {
+  font-size: clamp(1.95rem, 5.2vw, 5.15rem);
+  line-height: 1.02;
+  letter-spacing: -0.034em;
 }
 
-.atelier-section-title {
-  font-size: clamp(1.85rem, 3.2vw, 2.85rem);
-  line-height: 1.08;
+.type-h1 {
+  font-size: clamp(1.75rem, 4.2vw, 4.1rem);
+  line-height: 1.06;
   letter-spacing: -0.028em;
+}
+
+.type-h2 {
+  font-size: clamp(1.55rem, 3.2vw, 3.15rem);
+  line-height: 1.1;
+  letter-spacing: -0.026em;
+}
+
+.type-h3 {
+  font-size: clamp(1.35rem, 2vw, 1.95rem);
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+}
+
+.type-body-lg {
+  font-size: clamp(1.0625rem, 1.15vw, 1.1875rem);
+  line-height: 1.6;
+}
+
+.type-body {
+  font-size: clamp(0.9375rem, 1vw, 1.0625rem);
+  line-height: 1.65;
 }
 
 @media (prefers-reduced-motion: reduce) {

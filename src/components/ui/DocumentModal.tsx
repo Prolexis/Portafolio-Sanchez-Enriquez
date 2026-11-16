@@ -72,18 +72,18 @@ export function DocumentModal({
       role="dialog"
       aria-modal="true"
       aria-labelledby={titleId}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-obsidian/90 p-3 backdrop-blur-md sm:p-6"
+      className="fixed inset-0 z-[70] flex items-center justify-center bg-[#090B10]/92 p-3 sm:p-6"
       onClick={(e) => {
         if (e.target === e.currentTarget) {
           onClose();
         }
       }}
     >
-      <div className="flex max-h-[94vh] w-full max-w-5xl flex-col overflow-hidden rounded-2xl border border-white/15 bg-carbon shadow-atelierDark">
-        <div className="flex flex-wrap items-start justify-between gap-3 border-b border-white/10 px-4 py-4 sm:px-6">
+      <div className="flex max-h-[94vh] w-full max-w-5xl flex-col overflow-hidden rounded-2xl border border-ruleDark bg-carbon shadow-editorialDark">
+        <div className="flex flex-wrap items-start justify-between gap-3 border-b border-ruleDark px-4 py-4 sm:px-6">
           <div className="min-w-0 flex-1">
             {subtitle && (
-              <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-cobalt-soft">
+              <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-cobalt">
                 {subtitle}
               </p>
             )}
@@ -99,17 +99,17 @@ export function DocumentModal({
             <button
               type="button"
               onClick={() => setZoomed((prev) => !prev)}
-              className="inline-flex items-center gap-1.5 rounded-md border border-white/15 bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-white transition-colors hover:border-white/30"
+              className="inline-flex items-center gap-1.5 rounded-md border border-ruleDark bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-white transition-colors hover:border-white/30"
               aria-pressed={zoomed}
             >
               {zoomed ? (
                 <>
-                  <ZoomOut className="h-3.5 w-3.5 text-cobalt-soft" aria-hidden="true" />
+                  <ZoomOut className="h-3.5 w-3.5 text-cobalt" aria-hidden="true" />
                   <span>Ajustar</span>
                 </>
               ) : (
                 <>
-                  <ZoomIn className="h-3.5 w-3.5 text-cobalt-soft" aria-hidden="true" />
+                  <ZoomIn className="h-3.5 w-3.5 text-cobalt" aria-hidden="true" />
                   <span>Zoom</span>
                 </>
               )}
@@ -119,9 +119,9 @@ export function DocumentModal({
               href={imagePath}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-md border border-white/15 bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-white transition-colors hover:border-white/30"
+              className="inline-flex items-center gap-1.5 rounded-md border border-ruleDark bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-white transition-colors hover:border-white/30"
             >
-              <ExternalLink className="h-3.5 w-3.5 text-cobalt-soft" aria-hidden="true" />
+              <ExternalLink className="h-3.5 w-3.5 text-cobalt" aria-hidden="true" />
               <span className="hidden sm:inline">Abrir original</span>
             </a>
 
@@ -139,7 +139,7 @@ export function DocumentModal({
               type="button"
               onClick={onClose}
               aria-label="Cerrar visor del documento"
-              className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-white/15 bg-white/[0.04] text-editorial-muted transition-colors hover:text-white"
+              className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-ruleDark bg-white/[0.04] text-mutedDark transition-colors hover:text-white"
             >
               <X className="h-4 w-4" aria-hidden="true" />
             </button>
@@ -153,7 +153,7 @@ export function DocumentModal({
               src={imagePath}
               alt={imageAlt}
               className={cn(
-                'rounded-lg border border-white/10 bg-black/40 object-contain transition-all duration-200',
+                'rounded-lg bg-black/40 object-contain transition-all duration-200',
                 zoomed
                   ? 'max-w-none w-[160%] sm:w-[135%] cursor-zoom-out'
                   : 'max-h-[62vh] w-auto max-w-full cursor-zoom-in'
@@ -164,7 +164,7 @@ export function DocumentModal({
         </div>
 
         {(issuer || dateLabel || signers.length > 0 || integrityNote) && (
-          <div className="space-y-1.5 border-t border-white/10 bg-carbon px-4 py-4 text-xs text-editorial-muted sm:px-6">
+          <div className="space-y-1.5 border-t border-ruleDark bg-carbon px-4 py-4 text-xs text-mutedDark sm:px-6">
             {(issuer || dateLabel) && (
               <div className="flex flex-wrap gap-x-6 gap-y-1">
                 {issuer && (
@@ -174,8 +174,7 @@ export function DocumentModal({
                 )}
                 {dateLabel && (
                   <p>
-                    <span className="font-semibold text-white">Fecha / lugar:</span>{' '}
-                    {dateLabel}
+                    <span className="font-semibold text-white">Fecha:</span> {dateLabel}
                   </p>
                 )}
               </div>
@@ -186,7 +185,7 @@ export function DocumentModal({
                 {signers.join(' · ')}
               </p>
             )}
-            {integrityNote && <p className="text-editorial-muted/85">{integrityNote}</p>}
+            {integrityNote && <p>{integrityNote}</p>}
           </div>
         )}
       </div>

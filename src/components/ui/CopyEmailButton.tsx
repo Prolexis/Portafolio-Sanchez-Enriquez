@@ -37,8 +37,8 @@ export function CopyEmailButton({
       className={cn(
         'inline-flex items-center justify-center gap-2 rounded-md border px-4 py-2.5 text-sm font-medium transition-colors',
         tone === 'light'
-          ? 'border-editorial-borderLight bg-white text-ink hover:border-ink/35'
-          : 'border-white/20 bg-white/[0.04] text-white hover:border-white/40',
+          ? 'border-ruleLight bg-white text-ink hover:border-ink/35'
+          : 'border-ruleDark bg-white/[0.04] text-white hover:border-white/35',
         variant === 'compact' && 'px-3 py-1.5 text-xs',
         className
       )}

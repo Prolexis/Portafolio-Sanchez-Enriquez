@@ -9,22 +9,17 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        carbon: '#101319',
-        obsidian: '#0B0D12',
-        ivory: '#F5F3EE',
-        stone: '#EAE9E5',
-        ink: '#1B2029',
+        carbon: '#10141B',
+        ivory: '#F4F2ED',
         cobalt: {
-          DEFAULT: '#3F63E8',
-          hover: '#3153D3',
-          soft: '#7399FF',
+          DEFAULT: '#4568EC',
+          hover: '#3656D4',
         },
-        editorial: {
-          muted: '#A8A8A3',
-          inkMuted: '#5B6270',
-          borderDark: '#232833',
-          borderLight: '#DCDAD3',
-        },
+        ink: '#171C25',
+        mutedDark: '#87909F',
+        mutedLight: '#657080',
+        ruleLight: '#DADDE3',
+        ruleDark: '#2D3440',
       },
       fontFamily: {
         sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
@@ -32,11 +27,11 @@ const config: Config = {
         mono: ['var(--font-jetbrains-mono)', 'ui-monospace', 'SFMono-Regular', 'monospace'],
       },
       maxWidth: {
-        atelier: '1320px',
+        signature: '1320px',
       },
       boxShadow: {
-        atelier: '0 24px 60px -28px rgba(11, 13, 18, 0.28)',
-        atelierDark: '0 24px 64px -28px rgba(0, 0, 0, 0.72)',
+        editorialLight: '0 20px 50px -28px rgba(23, 28, 37, 0.16)',
+        editorialDark: '0 24px 60px -28px rgba(0, 0, 0, 0.65)',
       },
     },
   },
