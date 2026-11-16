@@ -2,6 +2,12 @@ export type ProjectCategory = 'IA' | 'Web' | 'Seguridad' | 'Datos' | 'Hackathons
 
 export type ArchitectureDiagramKind = 'vasochain' | 'yaku-alert' | 'egresados';
 
+export type CoverVisualKind =
+  | 'vasochain-product'
+  | 'minesafe-3d'
+  | 'yaku-map'
+  | 'egresados-portal';
+
 export interface ProjectVisual {
   src: string;
   alt: string;
@@ -10,10 +16,12 @@ export interface ProjectVisual {
 
 export interface FlagshipProject {
   slug: string;
+  indexLabel: string;
   order: number;
   name: string;
   shortTitle: string;
   tagline: string;
+  editorialSubtitle: string;
   categories: ProjectCategory[];
   year: string;
   status: string;
@@ -24,12 +32,18 @@ export interface FlagshipProject {
   repoUrl: string;
   liveDemoUrl?: string;
   liveDemoLabel?: string;
+  coverImage?: {
+    src: string;
+    alt: string;
+  };
+  coverIllustration?: CoverVisualKind;
   architectureKind?: ArchitectureDiagramKind;
   visuals: ProjectVisual[];
   problem: string;
   solution: string;
   architectureSummary: string[];
   confirmedStack: string[];
+  previewTags: string[];
   implementedFeatures: string[];
   howToVerify: string[];
   challengesAndLearnings: string[];
@@ -60,393 +74,389 @@ export const projectFilterCategories: readonly ('Todos' | ProjectCategory)[] = [
 export const flagshipProjects: FlagshipProject[] = [
   {
     slug: 'vasochain-ai',
+    indexLabel: '01',
     order: 1,
-    name: 'VasoChain AI',
-    shortTitle: 'VasoChain AI — Trazabilidad Social & IA',
+    name: 'VasoChainAI',
+    shortTitle: 'VasoChainAI — IA, Blockchain y Supervisión Social',
     tagline:
-      'Plataforma de supervisión transparente y trazabilidad para programas sociales con verificación multimodal, WhatsApp y registro en blockchain.',
+      'Supervisión transparente del Programa Vaso de Leche mediante verificación visual de entregas, WhatsApp y registro inmutable en blockchain.',
+    editorialSubtitle: 'IA, blockchain y trazabilidad social',
     categories: ['IA', 'Web', 'Hackathons', 'Seguridad'],
     year: '2026',
-    status: 'Prototipo funcional premiado · Docker Compose (4 servicios)',
+    status: '3.er lugar nacional · Hackathon Syscoin 2026',
     collaborationNote:
-      'Participación en la Hackathon de Inteligencia Artificial organizada por Syscoin (junio–julio de 2026). Proyecto galardonado con el 3.er lugar nacional.',
+      'Proyecto desarrollado para la Hackathon de Inteligencia Artificial organizada por Syscoin (junio–julio de 2026). Galardonado con el 3.er lugar nacional.',
     roleVerified:
-      'Desarrollo de arquitectura full-stack, integración entre frontend, API NestJS, contratos en Hardhat y validación mediante agente multimodal.',
-    recognitionBadge: '3.er lugar nacional · Reconocimiento UNT (2026)',
+      'Arquitectura full-stack entre cliente React, API modular NestJS/Prisma, contrato inteligente DeliveryRegistry.sol y verificación multimodal.',
+    recognitionBadge: '3.er lugar nacional · Hackathon Syscoin 2026',
     relatedAchievementId: 'syscoin-unt-2026',
     repoUrl: 'https://github.com/Prolexis/vasochainAI',
+    coverIllustration: 'vasochain-product',
     architectureKind: 'vasochain',
     visuals: [],
     problem:
-      'Los programas municipales de asistencia alimentaria enfrentan brechas de auditoría entre la entrega física de insumos y el registro administrativo, dificultando comprobar con evidencia confiable que cada ración llegó al beneficiario correcto.',
+      'Los programas municipales de asistencia alimentaria enfrentan brechas entre la entrega física de raciones y su auditoría administrativa.',
     solution:
-      'Sistema integral que combina un flujo conversacional de reporte por WhatsApp, análisis de comprobantes mediante visión multimodal (Claude Vision), persistencia relacional en PostgreSQL y anclaje criptográfico de hashes de entrega en el contrato inteligente DeliveryRegistry.sol.',
+      'Plataforma que integra reporte por WhatsApp, verificación fotográfica con Claude Vision, registro relacional en PostgreSQL y anclaje criptográfico en DeliveryRegistry.sol.',
     architectureSummary: [
-      'Frontend operativo en React + Vite + Tailwind CSS (puerto 5174) para gestión de beneficiarios, entregas y auditoría.',
-      'Backend modular en NestJS + Prisma ORM (puerto 3001) con módulos de autenticación, beneficiarios, entregas, controles, blockchain, IA y WhatsApp.',
-      'Persistencia en PostgreSQL (puerto 5433) separada de la red blockchain local en Hardhat (puerto 8545) que ejecuta DeliveryRegistry.sol.',
-      'Arnés de verificación de 13 controles automatizados y simulador de WhatsApp para probar flujos sin costos externos de mensajería.',
+      'Frontend React + Vite + Tailwind CSS (:5174) para monitoreo de beneficiarios, entregas y auditoría.',
+      'Backend NestJS + Prisma ORM (:3001) con módulos de auth, beneficiarios, entregas, controles, blockchain, IA, whatsapp y harness.',
+      'PostgreSQL (:5433) separado del nodo Hardhat (:8545) que ejecuta DeliveryRegistry.sol.',
+      'Arnés automatizado de 13 controles y simulador local de WhatsApp.',
     ],
     confirmedStack: [
       'React',
-      'Vite',
-      'Tailwind CSS',
       'NestJS',
-      'Prisma ORM',
+      'Prisma',
       'PostgreSQL',
       'Solidity / Hardhat',
-      'Anthropic Claude Vision',
+      'Claude Vision',
       'Docker Compose',
     ],
+    previewTags: ['React', 'NestJS', 'Solidity'],
     implementedFeatures: [
-      'Registro y control trazable de entregas con hash inmutable on-chain (DeliveryRegistry.sol).',
-      'Verificación visual automática de evidencia fotográfica apoyada en Claude Vision.',
-      'Canal conversacional compatible con simulador local de WhatsApp, Whapi, Twilio, Telegram y Discord.',
-      'Arnés de 13 controles en backend para validar reglas operativas y consistencia antes del anclaje.',
+      'Registro inmutable de hashes de entrega mediante DeliveryRegistry.sol.',
+      'Validación visual de comprobantes de entrega con Claude Vision.',
+      'Canal conversacional compatible con simulador local de WhatsApp, Whapi y Twilio.',
+      'Arnés de 13 controles internos en backend.',
     ],
     howToVerify: [
-      'Clonar github.com/Prolexis/vasochainAI y revisar los módulos en backend/src (auth, beneficiarios, entregas, controles, blockchain, ia, whatsapp, harness).',
-      'Levantar la pila completa de 4 contenedores con Docker Compose (frontend :5174, API :3001, PostgreSQL :5433, Hardhat :8545).',
-      'Consultar el contrato inteligente DeliveryRegistry.sol y ejecutar los controles del módulo harness en entorno local.',
+      'Revisar backend/src y DeliveryRegistry.sol en github.com/Prolexis/vasochainAI.',
+      'Levantar la pila de 4 servicios con Docker Compose en entorno local.',
     ],
     challengesAndLearnings: [
-      'Desacoplar la validación operativa off-chain en NestJS del anclaje on-chain para mantener costos controlados y auditoría clara.',
-      'Diseñar un simulador local de WhatsApp y 13 controles de prueba para demostrar flujos complejos en vivo durante una hackathon sin depender de terceros.',
+      'Desacoplar la operación transaccional en PostgreSQL del sellado criptográfico on-chain.',
+      'Diseñar un simulador local y arnés de 13 controles para demostrar todo el flujo sin costos externos.',
     ],
     verifiedResults: [
-      '3.er lugar a nivel nacional en la Hackathon de Inteligencia Artificial organizada por Syscoin (junio–julio de 2026).',
-      'Reconocimiento oficial otorgado el 22 de julio de 2026 por la Escuela de Ingeniería de Sistemas y la Facultad de Ingeniería de la UNT.',
-      'Arquitectura completa reproducible con 4 servicios contenedorizados y licencia MIT.',
+      '3.er lugar nacional en la Hackathon de IA organizada por Syscoin (2026).',
+      'Reconocimiento emitido el 22 de julio de 2026 por la Escuela de Ingeniería de Sistemas de la UNT.',
     ],
   },
   {
     slug: 'minesafe-3d',
+    indexLabel: '02',
     order: 2,
     name: 'MineSafe 3D',
-    shortTitle: 'MineSafe 3D — Gemelo Digital & XAI',
+    shortTitle: 'MineSafe 3D — Gemelo Digital Explicable en Minería',
     tagline:
-      'Gemelo digital 3D explicable para simulación y predicción de riesgo de colisión en flotas mineras mixtas.',
+      'Gemelo digital tridimensional en Three.js e IA explicable (TreeSHAP) para simular y auditar riesgo de colisión en flotas mineras mixtas.',
+    editorialSubtitle: 'Gemelo digital 3D y predicción explicable (XAI)',
     categories: ['IA', 'Datos', 'Web'],
     year: '2026',
     status: 'Prototipo experimental + pipeline CRISP-DM reproducible',
     collaborationNote:
-      'Proyecto de ingeniería e investigación experimental con artefactos reproducibles y dataset sintético publicado en Zenodo.',
+      'Proyecto de ingeniería aplicada con experimentos reproducibles y dataset sintético en Zenodo.',
     roleVerified:
-      'Diseño de escena 3D en Three.js, microservicio de inferencia/XAI en FastAPI, pipeline experimental y documentación de límites éticos y técnicos.',
+      'Escena interactiva 3D en React/Three.js, microservicio FastAPI, atribución TreeSHAP y documentación de límites experimentales.',
     repoUrl: 'https://github.com/Prolexis/gemelo-digital-prototipo',
+    coverIllustration: 'minesafe-3d',
     visuals: [
       {
-        src: '/assets/projects/minesafe-architecture.png',
-        alt: 'Diagrama de arquitectura de 4 capas de MineSafe 3D: visualización Three.js, laboratorio CRISP-DM en Streamlit, motor físico cinemático, Random Forest con TreeSHAP y capa de ingesta',
+        src: '/assets/projects/minesafe-shap.png',
+        alt: 'Atribución causal global TreeSHAP en MineSafe 3D sobre dataset sintético',
         caption:
-          'Arquitectura experimental de cuatro capas integrando escena Three.js, motor cinemático y explicabilidad TreeSHAP.',
+          'Ranking global TreeSHAP: distancia LiDAR y velocidad GNSS lideran la atribución de riesgo en simulación.',
       },
       {
-        src: '/assets/projects/minesafe-shap.png',
-        alt: 'Gráfico TreeSHAP global de MineSafe 3D mostrando el impacto medio de distancia a obstáculo LiDAR y velocidad GNSS en las predicciones simuladas',
+        src: '/assets/projects/minesafe-architecture.png',
+        alt: 'Arquitectura técnica de 4 capas de MineSafe 3D',
         caption:
-          'Atribución causal global TreeSHAP sobre el conjunto experimental: distancia LiDAR (0.337) y velocidad GNSS (0.120) explican la mayor parte del score.',
+          'Arquitectura experimental de cuatro capas (Three.js, FastAPI, TreeSHAP, Redis y PostGIS).',
       },
     ],
     problem:
-      'En operaciones a tajo abierto con flotas mixtas (camiones manuales y autónomos), los modelos opacos de alerta no explican qué variable geométrica o de fatiga dispara una advertencia de proximidad.',
+      'Los modelos de alerta opacos no explican qué variable geométrica o de fatiga dispara una advertencia de proximidad entre camiones manuales y autónomos.',
     solution:
-      'Gemelo digital interactivo en React 19 + Three.js WebGL conectado a un backend FastAPI (Python 3.11) con pipeline de Machine Learning interpretable mediante TreeSHAP, copiloto auxiliar Gemini 2.5 Flash y exportación de reportes técnicos en PDF.',
+      'Escena 3D interactiva en React 19 + Three.js conectada a FastAPI con Random Forest + TreeSHAP, RBAC, reportes PDF y asistente Gemini 2.5 Flash.',
     architectureSummary: [
-      'Capa de presentación en React 19, TypeScript, Three.js WebGL y Tailwind CSS servida detrás de Nginx.',
-      'Microservicio FastAPI (/api/gemini/health, /analyze-risk, /chat) integrando Google GenAI (gemini-2.5-flash) con control de acceso por rol (RBAC).',
-      'Motor analítico y laboratorio experimental (/experiments/run_all.py) con cálculo TreeSHAP global y local para explicar cada predicción.',
-      'Dataset sintético abierto DSTM-MineSafe-2026.csv (n = 5,000, DOI 10.5281/zenodo.22905230) bajo licencias MIT + CC BY 4.0.',
+      'Frontend React 19, TypeScript y Three.js WebGL servido detrás de Nginx.',
+      'Microservicio FastAPI (/api/gemini/health, /analyze-risk, /chat) con RBAC y exportación PDF.',
+      'Laboratorio experimental (/experiments/run_all.py) con TreeSHAP global y local.',
+      'Dataset sintético abierto DSTM-MineSafe-2026.csv (n = 5,000, Zenodo DOI 10.5281/zenodo.22905230).',
     ],
     confirmedStack: [
       'React 19',
       'TypeScript',
-      'Three.js / WebGL',
-      'Python 3.11',
+      'Three.js',
+      'Python',
       'FastAPI',
-      'Random Forest / TreeSHAP',
-      'Google Gemini 2.5 Flash',
-      'Nginx / Docker',
+      'TreeSHAP',
+      'Docker',
     ],
+    previewTags: ['Three.js', 'FastAPI', 'TreeSHAP'],
     implementedFeatures: [
-      'Escena 3D interactiva con vehículos, trayectorias y semáforo visual de riesgo.',
-      'Explicabilidad causal global y local mediante TreeSHAP para auditar el peso de cada variable.',
-      'Asistente operativo y generación de reportes PDF estructurados con control RBAC.',
-      'Scripts reproducibles de benchmarking y comparación de latencia/curvas ROC-PR.',
+      'Simulación tridimensional de flotas con indicadores de proximidad.',
+      'Explicabilidad causal global y local mediante TreeSHAP.',
+      'Control RBAC y exportación de reportes técnicos en PDF.',
     ],
     howToVerify: [
-      'Revisar el README y los scripts bajo /experiments/run_all.py en github.com/Prolexis/gemelo-digital-prototipo.',
-      'Ejecutar el pipeline experimental sobre DSTM-MineSafe-2026.csv para regenerar figuras SHAP y tablas comparativas.',
-      'Verificar los endpoints FastAPI y las notas de licencia dual (MIT + CC BY 4.0).',
+      'Ejecutar /experiments/run_all.py sobre DSTM-MineSafe-2026.csv desde github.com/Prolexis/gemelo-digital-prototipo.',
     ],
     challengesAndLearnings: [
-      'Mantener fluidez visual en Three.js separando el renderizado del cálculo explicable TreeSHAP.',
-      'Comunicar con rigor científico los alcances de un benchmark sintético sin extrapolarlo a seguridad minera certificada en campo.',
+      'Desacoplar la fluidez WebGL en Three.js de las inferencias explicables en Python.',
+      'Documentar explícitamente la frontera entre benchmark sintético y validación en faena real.',
     ],
     verifiedResults: [
-      'Pipeline experimental completamente reproducible con 5 figuras técnicas generadas desde código.',
-      'En simulación controlada se midió un AUC-ROC de 0.942 con FPR de 4.8% (y variantes experimentales RF documentadas en laboratorio), junto con reducción simulada de tiempo de evaluación de 6.4 s a 1.8 s.',
+      'En simulación controlada sobre DSTM-MineSafe-2026 se midió AUC-ROC 0.942 con FPR 4.8% y reducción simulada de evaluación de 6.4 s a 1.8 s.',
     ],
     disclaimer:
-      'Aviso técnico: todas las métricas reportadas provienen exclusivamente de simulación experimental sobre el dataset sintético DSTM-MineSafe-2026 (n = 5,000). No constituyen validación en faena minera real ni certificación ISO 21815 o MSHA.',
+      'Aviso científico: las métricas reportadas provienen exclusivamente de simulación experimental sobre el dataset sintético DSTM-MineSafe-2026 (n = 5,000). No representa validación comercial ni certificación ISO 21815 / MSHA.',
   },
   {
     slug: 'yaku-alert-unt',
+    indexLabel: '03',
     order: 3,
     name: 'YAKU ALERT — UNT',
-    shortTitle: 'YAKU ALERT — Riesgo Hidrometeorológico',
+    shortTitle: 'YAKU ALERT — Plataforma Geoespacial Preventiva',
     tagline:
-      'Prototipo geoespacial para monitoreo preventivo, corredores hídricos y respuesta ante lluvias extremas en Trujillo y campus UNT.',
+      'Monitoreo preventivo, mapas de corredores hídricos y respuesta ante lluvias extremas en Trujillo y campus UNT.',
+    editorialSubtitle: 'Hackathon Innova Norte 3G 2026 · Desafío 3',
     categories: ['Web', 'Datos', 'Hackathons'],
     year: '2026',
     status: 'Prototipo de hackathon · FastAPI + Leaflet + pytest',
     collaborationNote:
-      'Desarrollado en el marco de la Hackathon Innova Norte 3G 2026 (Desafío 3). Trabajo colaborativo orientado a prevención universitaria y territorial.',
+      'Desarrollado colaborativamente para la Hackathon Innova Norte 3G 2026 (Desafío 3).',
     roleVerified:
-      'Implementación de vistas espaciales en React + Leaflet, integración del motor geométrico en FastAPI/Shapely y separación clara entre pronóstico y simulación.',
+      'Tres vistas espaciales en React + Leaflet, motor geométrico en FastAPI + Shapely y modo offline de respaldo.',
     repoUrl: 'https://github.com/Prolexis/yaku-alert-unt',
+    coverIllustration: 'yaku-map',
     architectureKind: 'yaku-alert',
     visuals: [],
     problem:
-      'Ante eventos de lluvia intensa o activación de quebradas en Trujillo, la comunidad universitaria necesita comprender corredores hídricos locales y rutas preventivas sin confundir escenarios simulados con alertas meteorológicas oficiales.',
+      'Ante lluvias intensas en Trujillo, se requiere visualizar corredores hídricos y rutas preventivas sin confundir escenarios académicos simulados con alertas oficiales.',
     solution:
-      'Aplicación web modular con tres vistas operativas (Monitoreo, Mapa y Escenarios, Prevención y Respuesta), respaldada por un motor en FastAPI + Shapely 2.x que combina consulta a Open-Meteo (IPv4) con modo offline de respaldo.',
+      'Aplicación React + Leaflet con tres vistas (Monitoreo, Mapa y Escenarios, Prevención y Respuesta), respaldada por FastAPI + Shapely 2.x y Open-Meteo con fallback offline.',
     architectureSummary: [
-      'Frontend en React + Vite + Tailwind CSS + Leaflet (puerto 8080) organizado en tres vistas orientadas a toma de decisión preventiva.',
-      'Backend FastAPI + Shapely 2.x (puerto 8000) para intersecciones espaciales, análisis territorial de escenarios y validación con pruebas en pytest.',
-      'Cliente meteorológico sobre Open-Meteo con tolerancia a fallos mediante datos de respaldo offline para demostraciones sin conectividad.',
-      'Diseño alineado al enfoque de gestión prospectiva y reactiva de la Ley N.° 29664 (SINAGERD) sin captura de GPS ni datos personales.',
+      'Frontend React + Vite + Tailwind + Leaflet (:8080) organizado en tres vistas operativas.',
+      'Backend espacial FastAPI + Shapely 2.x (:8000) verificado con pytest.',
+      'Ingesta meteorológica Open-Meteo IPv4 con respaldo offline automático.',
     ],
     confirmedStack: [
       'React',
-      'Vite',
-      'Tailwind CSS',
       'Leaflet',
+      'Tailwind CSS',
       'Python',
       'FastAPI',
-      'Shapely 2.x',
-      'Open-Meteo',
-      'pytest',
-      'Docker Compose',
+      'Shapely',
+      'Docker',
     ],
+    previewTags: ['React', 'Leaflet', 'FastAPI'],
     implementedFeatures: [
-      'Tres vistas integradas: panel de monitoreo, cartografía interactiva de escenarios y protocolos preventivos.',
-      'Etiquetado explícito que distingue pronóstico meteorológico externo de escenarios sintéticos de lluvia.',
-      'Cero recolección de PII ni ubicación GPS del usuario final.',
-      'Suite de pruebas automatizadas en backend con pytest y despliegue con Docker Compose.',
+      'Panel de monitoreo, cartografía de escenarios y guía de respuesta UNT.',
+      'Separación explícita entre pronóstico externo y escenario sintético.',
+      'Sin captura de GPS ni datos personales del visitante.',
     ],
     howToVerify: [
-      'Inspeccionar el repositorio github.com/Prolexis/yaku-alert-unt y su suite de pruebas en pytest.',
-      'Levantar frontend (:8080) y backend (:8000) mediante Docker Compose para explorar las 3 vistas en Leaflet.',
+      'Inspeccionar el repositorio github.com/Prolexis/yaku-alert-unt y su batería pytest.',
     ],
     challengesAndLearnings: [
-      'Evitar errores de interpretación de riesgo separando visual y semánticamente los escenarios hipotéticos de datos meteorológicos reales.',
-      'Garantizar resiliencia en exposiciones de hackathon mediante respaldo offline automático ante cortes de red.',
+      'Evitar ambigüedad visual entre datos meteorológicos reales y escenarios hipotéticos.',
     ],
     verifiedResults: [
-      'Prototipo funcional presentado para el Desafío 3 de la Hackathon Innova Norte 3G 2026.',
-      'Backend espacial verificado con pruebas automatizadas en pytest y ejecución estable vía Docker Compose.',
+      'Prototipo funcional presentado en la Hackathon Innova Norte 3G 2026 con backend cubierto por pytest.',
     ],
     disclaimer:
-      'Aviso legal (Ley N.° 29664 — SINAGERD): prototipo informativo y académico. No reemplaza los avisos oficiales de SENAMHI, COEN, INDECI ni de Defensa Civil de la UNT.',
+      'Aviso legal (Ley N.° 29664 — SINAGERD): prototipo informativo y académico. No sustituye avisos oficiales de SENAMHI, COEN, INDECI ni Defensa Civil UNT.',
   },
   {
-    slug: 'identity-risk-ai',
+    slug: 'establo-ai-leads',
+    indexLabel: '04',
     order: 4,
-    name: 'Identity Risk AI (OrphanHunter)',
-    shortTitle: 'Identity Risk AI — Auditoría Active Directory',
+    name: 'Establo AI Leads',
+    shortTitle: 'Establo AI Leads — Inteligencia Comercial y SQL Server',
     tagline:
-      'Motor determinista de auditoría y priorización de riesgo de identidad en Active Directory sobre telemetría SharpHound/BloodHound.',
-    categories: ['Seguridad', 'IA', 'Datos'],
+      'Tablero operativo e inteligencia comercial acotada a 12 herramientas autorizadas sobre SQL Server V3 para conversión LEAD → PAYER.',
+    editorialSubtitle: 'Analítica comercial y copiloto seguro SQL',
+    categories: ['Datos', 'IA', 'Web'],
     year: '2026',
-    status: 'Plataforma SOC completa · Tests unit/smoke/report/UI',
+    status: 'Proyecto académico BI · Next.js 15 + SQL Server 2019+',
     collaborationNote:
-      'Proyecto colaborativo de ciberseguridad defensiva con auditoría determinista, persistencia trazable y flujos de orquestación.',
+      'Proyecto académico de Inteligencia de Negocios para Parrilladas El Establo (Trujillo).',
     roleVerified:
-      'Construcción del motor de reglas deterministas R01–R06, capa SQLAlchemy/API FastAPI, exportación ejecutiva y paneles operativos.',
-    repoUrl: 'https://github.com/Prolexis/caso16-identity-risk-ai',
+      'Dashboard ejecutivo en Next.js 15, pool parametrizado mssql sin SQL libre y 12 herramientas seguras para el copiloto.',
+    relatedAchievementId: 'sql-server-2025',
+    repoUrl: 'https://github.com/Prolexis/establo-ai-leads',
+    coverImage: {
+      src: '/assets/projects/establo-ui.png',
+      alt: 'Interfaz web real de Establo AI Leads mostrando KPIs TCP, TEN y TPN y seguimiento comercial',
+    },
     visuals: [
       {
-        src: '/assets/projects/caso16-architecture.png',
-        alt: 'Diagrama de arquitectura de OrphanHunter (Identity Risk AI): ingesta SharpHound/BloodHound, normalización SQLAlchemy, motor de reglas R01-R06, persistencia SQLite/PostgreSQL, consola Streamlit y React',
-        caption:
-          'Separación estricta entre el motor determinista de evidencia (R01–R06) y las capas de visualización SOC y API.',
+        src: '/assets/projects/establo-ui.png',
+        alt: 'Interfaz web real de Establo AI Leads',
+        caption: 'Vista principal del panel de control en Next.js 15 conectado a SQL Server V3.',
       },
       {
-        src: '/assets/projects/caso16-risk.png',
-        alt: 'Gráfico de distribución del score de riesgo 0 a 100 sobre 113 cuentas de laboratorio en Identity Risk AI',
-        caption:
-          'Distribución del índice de riesgo (0–100) en el conjunto de prueba controlado de 113 cuentas y 4 dominios simulados.',
+        src: '/assets/projects/establo-dashboard.png',
+        alt: 'Reporte ejecutivo de la fase LEADS con métricas simuladas',
+        caption: 'Reporte analítico LEAD → PAYER con rotulado explícito de datos simulados.',
+      },
+      {
+        src: '/assets/projects/establo-arquitectura.png',
+        alt: 'Arquitectura técnica de Establo AI sobre SQL Server V3',
+        caption: 'Aislamiento del copiloto mediante 12 herramientas y vistas parametrizadas (sin SQL libre).',
       },
     ],
     problem:
-      'Los equipos de seguridad necesitan detectar cuentas huérfanas, privilegios heredados o exposiciones Kerberoasting/AS-REP en Active Directory sin depender de cajas negras opacas ni alterar el directorio en producción.',
+      'Permitir que un modelo generativo ejecute SQL arbitrario sobre bases comerciales abre riesgos de inyección y métricas inconsistentes.',
     solution:
-      'Plataforma defensiva de solo lectura que ingiere volcados SharpHound/BloodHound, normaliza relaciones en SQLAlchemy y aplica un motor determinista de 6 reglas (R01–R06) con puntuación 0–100, bitácora append-only y exportación de reportes.',
+      'Aplicación Next.js 15 conectada vía pool parametrizado mssql a vistas auditables en SQL Server V3 (34 tablas, 9 vistas) con copiloto limitado a 12 herramientas seguras.',
     architectureSummary: [
-      'Capa de ingesta read-only sobre archivos JSON/CSV de SharpHound/BloodHound sin tocar controladores de dominio vivos.',
-      'Motor determinista R01–R06 con cálculo explicable de puntaje 0–100 y clasificación entre hallazgos confirmados y potenciales.',
-      'API FastAPI /api/v1 (puerto 8000), consola SOC en Streamlit (puerto 8501) y frontend React 18 + TypeScript + Vite (puerto 5173).',
-      'Persistencia en PostgreSQL 16 o SQLite con tabla audit_logs en modo append-only y automatizaciones n8n / LangFlow.',
+      '9 módulos operativos en Next.js 15 App Router, React, TypeScript y Tailwind CSS.',
+      'Pool parametrizado mssql sobre base buyer V3 con semáforo de seguimiento 24h/48h/72h.',
+      'Validación Zod y vigencia promocional en zona horaria America/Lima.',
+    ],
+    confirmedStack: [
+      'Next.js',
+      'TypeScript',
+      'React',
+      'Tailwind CSS',
+      'SQL Server',
+      'Google Gemini',
+    ],
+    previewTags: ['Next.js', 'SQL Server', 'TypeScript'],
+    implementedFeatures: [
+      'KPIs auditables (TCP, TEN, TPN) calculados desde vistas SQL Server.',
+      '12 herramientas seguras sin exposición directa de SQL libre.',
+      'Perfil 360° enfocado exclusivamente al ciclo LEAD → PAYER.',
+    ],
+    howToVerify: [
+      'Revisar vistas, validadores Zod y herramientas autorizadas en github.com/Prolexis/establo-ai-leads.',
+    ],
+    challengesAndLearnings: [
+      'Aislar al LLM del motor relacional mediante contratos estrictos de herramientas.',
+    ],
+    verifiedResults: [
+      'Validación académica completa sobre esquema SQL Server V3 (17 personas y 19 ciclos simulados).',
+    ],
+    disclaimer:
+      'Datos académicos y simulados: las cifras corresponden al entorno buyer V3 y no a facturación comercial real.',
+  },
+  {
+    slug: 'identity-risk-ai',
+    indexLabel: '05',
+    order: 5,
+    name: 'Caso16 Identity Risk AI',
+    shortTitle: 'Caso16 Identity Risk AI — Riesgos de Identidad y Ciberseguridad',
+    tagline:
+      'Auditoría determinista en modo lectura sobre Active Directory (SharpHound/BloodHound) con score 0–100 y bitácora inmutable.',
+    editorialSubtitle: 'Riesgos de identidad y ciberseguridad defensiva',
+    categories: ['Seguridad', 'IA', 'Datos'],
+    year: '2026',
+    status: 'Plataforma SOC completa · Pruebas unit/smoke/report/UI',
+    collaborationNote:
+      'Proyecto colaborativo de ciberseguridad defensiva orientado a evidencia trazable.',
+    roleVerified:
+      'Motor determinista R01–R06, API FastAPI/SQLAlchemy, consolas Streamlit/React y exportación de reportes.',
+    repoUrl: 'https://github.com/Prolexis/caso16-identity-risk-ai',
+    coverImage: {
+      src: '/assets/projects/caso16-risk.png',
+      alt: 'Distribución del índice de riesgo 0 a 100 sobre 113 cuentas de laboratorio en Caso16 Identity Risk AI',
+    },
+    visuals: [
+      {
+        src: '/assets/projects/caso16-risk.png',
+        alt: 'Distribución del score de riesgo 0 a 100 en 113 cuentas',
+        caption: 'Distribución cuantitativa del riesgo (0–100) sobre 113 cuentas de laboratorio.',
+      },
+      {
+        src: '/assets/projects/caso16-architecture.png',
+        alt: 'Arquitectura técnica de Caso16 Identity Risk AI',
+        caption: 'Separación entre motor determinista R01–R06 y capas de visualización SOC.',
+      },
+    ],
+    problem:
+      'Las auditorías de identidad en Active Directory exigen resultados deterministas y trazabilidad sin intervenir controladores en producción.',
+    solution:
+      'Motor en modo lectura sobre volcados SharpHound/BloodHound con seis reglas deterministas (R01–R06), score 0–100, bitácora append-only y exportación XLSX/DOCX/PDF.',
+    architectureSummary: [
+      'Normalización SQLAlchemy + PostgreSQL 16 / SQLite con bitácora append-only audit_logs.',
+      'API FastAPI (:8000), consola SOC Streamlit (:8501) y frontend React 18 + TypeScript (:5173).',
+      'Automatizaciones auxiliares n8n / LangFlow sobre evidencia ya confirmada.',
     ],
     confirmedStack: [
       'Python',
       'FastAPI',
       'Streamlit',
-      'React 18 + TypeScript',
+      'React',
+      'TypeScript',
+      'PostgreSQL',
       'SQLAlchemy',
-      'PostgreSQL 16 / SQLite',
-      'SharpHound / BloodHound',
-      'n8n / LangFlow',
     ],
+    previewTags: ['Python', 'FastAPI', 'PostgreSQL'],
     implementedFeatures: [
-      'Seis reglas deterministas auditables (R01–R06) alineadas con controles ISO/IEC 27001 A.8.2 y A.8.16.',
-      'Exportación estructurada a XLSX, DOCX y PDF para equipos técnicos y comités de seguridad.',
-      'Registro histórico inmutable (audit_logs append-only) para preservar trazabilidad de evaluaciones.',
-      'Batería de pruebas unitarias, smoke, generación de reportes e interfaz.',
+      'Seis reglas deterministas R01–R06 alineadas a controles ISO/IEC 27001 A.8.2 y A.8.16.',
+      'Exportación técnica en XLSX, DOCX y PDF.',
+      'Suites unit, smoke, report y ui.',
     ],
     howToVerify: [
-      'Consultar el código y la guía de pruebas en github.com/Prolexis/caso16-identity-risk-ai.',
-      'Ejecutar las suites de prueba unit/smoke/report/ui incluidas con el conjunto de laboratorio de 4 dominios.',
+      'Ejecutar las suites incluidas en github.com/Prolexis/caso16-identity-risk-ai.',
     ],
     challengesAndLearnings: [
-      'Garantizar que la IA y las interfaces solo interpreten o prioricen evidencia ya validada por el motor determinista, evitando falsos hallazgos inventados.',
-      'Estructurar reportes técnicos reproducibles a partir de grafos de identidad complejos.',
+      'Garantizar que ninguna capa de IA invente hallazgos fuera de la evidencia del grafo.',
     ],
     verifiedResults: [
-      'Sobre el dataset controlado de 4 dominios simulados (113 cuentas totales) generó 269 hallazgos trazables (44 críticos, 107 altos, 118 medios; 117 confirmados y 152 potenciales).',
-      'Cobertura completa de ingesta en modo lectura, puntuación 0–100 y exportación multipantalla probada en entorno de laboratorio.',
+      'Evaluado en entorno de laboratorio sobre 4 dominios simulados (113 cuentas, 269 hallazgos trazables).',
     ],
     disclaimer:
-      'Entorno evaluado sobre dominios de laboratorio simulados (PHANTOM.CORP, WRAITH.CORP, ESC1.LOCAL y GHOST.CORP). Diseñado exclusivamente para auditoría defensiva en modo lectura sobre volcados autorizados.',
-  },
-  {
-    slug: 'establo-ai-leads',
-    order: 5,
-    name: 'Establo AI Leads',
-    shortTitle: 'Establo AI Leads — BI & Copiloto SQL',
-    tagline:
-      'Sistema de analítica transaccional y copiloto comercial acotado para conversión LEAD → PAYER sobre SQL Server V3.',
-    categories: ['Datos', 'IA', 'Web'],
-    year: '2026',
-    status: 'Proyecto académico BI · Next.js 15 + SQL Server V3',
-    collaborationNote:
-      'Proyecto académico de Inteligencia de Negocios enfocado en modelado relacional, KPIs auditables y agente comercial seguro para Parrilladas El Establo (Trujillo).',
-    roleVerified:
-      'Desarrollo de dashboard en Next.js 15 + Recharts, capa de consultas parametrizadas a SQL Server mediante mssql y diseño de 12 herramientas seguras para el copiloto Gemini/heurístico.',
-    relatedAchievementId: 'sql-server-2025',
-    repoUrl: 'https://github.com/Prolexis/establo-ai-leads',
-    visuals: [
-      {
-        src: '/assets/projects/establo-dashboard.png',
-        alt: 'Reporte ejecutivo de la fase LEADS de Parrilladas El Establo con métricas TCP, TAN y TPN marcadas como datos simulados',
-        caption:
-          'Dashboard de conversión LEAD → PAYER con desglose por medio de pago, motivos de abandono e indicación explícita de datos simulados.',
-      },
-      {
-        src: '/assets/projects/establo-arquitectura.png',
-        alt: 'Diagrama de arquitectura de ESTABLO AI conectando canales de mensajería, backend Next.js 15 con Zod, orquestación Hermes/MCP/Gemini y SQL Server V3 mediante procedimientos y consultas parametrizadas',
-        caption:
-          'Arquitectura segura: el copiloto opera exclusivamente mediante 12 herramientas autorizadas sobre vistas y SP en SQL Server V3 (sin SQL libre).',
-      },
-    ],
-    problem:
-      'En atención comercial por mensajería, conectar un modelo generativo directamente a la base de datos representa riesgos de inyección o cifras inventadas, además de perder foco en la etapa clave de conversión antes del pago.',
-    solution:
-      'Aplicación Next.js 15 App Router conectada a la base SQL Server 2019+ V3 (buyer, 34 tablas y 9 vistas como dbo.vw_kpi_mensual), acompañada de un copiloto con fallback heurístico restringido a 12 herramientas seguras y consultas parametrizadas.',
-    architectureSummary: [
-      'Frontend y rutas API en Next.js 15 + React 19 + TypeScript 5.7 + Tailwind CSS + Recharts distribuidos en 9 módulos operativos.',
-      'Pool parametrizado mssql sobre SQL Server 2019+ V3 (34 tablas y 9 vistas) evitando en todo momento SQL libre generado por el modelo.',
-      'Orquestación con Google Gemini / modo heurístico acotada a 12 herramientas autorizadas, validación Zod y zona horaria America/Lima para promociones.',
-      'Semáforo automático de abandono a las 72 horas y ficha Perfil 360° estrictamente delimitada al ciclo LEAD → PAYER.',
-    ],
-    confirmedStack: [
-      'Next.js 15',
-      'TypeScript 5.7',
-      'Tailwind CSS',
-      'Recharts',
-      'SQL Server 2019+ (T-SQL)',
-      'mssql (pool parametrizado)',
-      'Zod',
-      'Google Gemini / MCP',
-    ],
-    implementedFeatures: [
-      'Control de KPIs comerciales (TCP, TEN y TPN) calculados desde vistas SQL Server auditables.',
-      '12 herramientas seguras de solo lectura/acción acotada para el copiloto comercial sin exposición directa de esquema.',
-      'Semáforo de seguimiento de leads inactivos (24h / 48h / 72h) y validador de vigencia en America/Lima.',
-      'Interfaz operativa de WhatsApp conectable a canales oficiales sin romper reglas de negocio.',
-    ],
-    howToVerify: [
-      'Explorar la estructura de vistas, rutas API y herramientas autorizadas en github.com/Prolexis/establo-ai-leads.',
-      'Revisar el esquema SQL Server V3 (buyer) y los cálculos de KPIs mensuales en las vistas documentadas.',
-    ],
-    challengesAndLearnings: [
-      'Diseñar fronteras estrictas entre lenguaje natural y SQL para garantizar que toda métrica mostrada al operador venga de vistas verificadas.',
-      'Delimitar el dominio funcional exclusivamente a LEAD → PAYER evitó complejidad innecesaria y mejoró la trazabilidad de conversión.',
-    ],
-    verifiedResults: [
-      'Ejecución académica validada sobre la base SQL Server V3 (17 personas y 19 ciclos simulados, con métricas registradas de TCP, TEN y TPN).',
-      'Nueve módulos funcionales integrados incluyendo ficha Perfil 360°, semáforo de abandono y copiloto seguro.',
-    ],
-    disclaimer:
-      'Datos académicos y de simulación: las métricas mostradas (TCP, TEN, TAN y TPN) corresponden a pruebas sobre el esquema académico buyer V3 y no reflejan facturación comercial real en producción.',
+      'Evaluación en dominios de laboratorio simulados (PHANTOM.CORP, WRAITH.CORP, ESC1.LOCAL, GHOST.CORP) en modo solo lectura.',
   },
   {
     slug: 'egresados-system',
+    indexLabel: '06',
     order: 6,
-    name: 'EgresadosNet (egresados-system)',
-    shortTitle: 'EgresadosNet — Portal Full-Stack de Egresados',
+    name: 'Egresados System',
+    shortTitle: 'Egresados System — Plataforma de Vinculación Profesional',
     tagline:
-      'Monorepo empresarial para gestión de egresados, empleabilidad, analítica y generación asíncrona de CV en PDF.',
+      'Monorepo full-stack para vinculación de egresados, analítica laboral y generación asíncrona de CV en PDF.',
+    editorialSubtitle: 'Plataforma de vinculación profesional',
     categories: ['Web', 'Datos'],
     year: '2026',
-    status: 'Monorepo full-stack · Web desplegada en Vercel',
+    status: 'Monorepo full-stack · Portal desplegado en Vercel',
     collaborationNote:
-      'Proyecto académico de ingeniería de software full-stack construido en monorepo con integración continua en GitHub Actions.',
+      'Proyecto académico organizado en monorepo con integración continua en GitHub Actions.',
     roleVerified:
-      'Arquitectura monorepo web + API, estado global con Zustand, contratos tipados tRPC/Prisma y despliegue del cliente web en Vercel.',
+      'Arquitectura web + API en monorepo, contratos tipados tRPC/Prisma y despliegue en Vercel.',
     repoUrl: 'https://github.com/Prolexis/egresados-system',
     liveDemoUrl: 'https://egresados-system-web.vercel.app',
-    liveDemoLabel: 'Abrir portal web en Vercel (acceso /auth/login)',
+    liveDemoLabel: 'Abrir aplicación en Vercel',
+    coverIllustration: 'egresados-portal',
     architectureKind: 'egresados',
     visuals: [],
     problem:
-      'Las plataformas universitarias de seguimiento a egresados suelen quedar aisladas en hojas de cálculo o portales sin contratos tipados entre frontend, autenticación, analítica de empleabilidad y generación de documentos.',
+      'El seguimiento de egresados suele fragmentarse entre planillas aisladas sin contratos tipados ni exportación automatizada de currículums.',
     solution:
-      'Monorepo desacoplado con aplicación web en Next.js 14 (App Router) y backend NestJS 10 + tRPC + Prisma sobre PostgreSQL 15, apoyado por colas Bull/Redis 7 para renderizado de PDFs mediante Puppeteer.',
+      'Monorepo con cliente Next.js 14 desplegado en Vercel y backend NestJS 10 + tRPC + Prisma sobre PostgreSQL 15, delegando PDF con Puppeteer a colas Bull sobre Redis 7.',
     architectureSummary: [
-      'apps/web en Next.js 14 + React 18 + TypeScript + Tailwind CSS + Zustand + Recharts desplegada en Vercel.',
-      'apps/api en NestJS 10 + tRPC + Prisma ORM sobre PostgreSQL 15 con autenticación JWT / Passport.',
-      'Procesamiento asíncrono con colas Bull sobre Redis 7 para generar currículums en PDF mediante Puppeteer sin bloquear peticiones HTTP.',
-      'Orquestación local con Docker Compose y flujo de verificación automatizada en GitHub Actions CI.',
+      'apps/web en Next.js 14, React, TypeScript, Tailwind CSS y Zustand.',
+      'apps/api en NestJS 10 + tRPC + Prisma ORM sobre PostgreSQL 15 con JWT/Passport.',
+      'Workers Bull + Redis 7 + Puppeteer para generación asíncrona de CV en PDF.',
     ],
     confirmedStack: [
-      'Next.js 14',
+      'Next.js',
       'TypeScript',
+      'React',
       'Tailwind CSS',
-      'Zustand / Recharts',
-      'NestJS 10',
-      'tRPC',
-      'Prisma + PostgreSQL 15',
-      'Bull + Redis 7 + Puppeteer',
+      'NestJS',
+      'PostgreSQL',
+      'Docker',
+      'Git',
     ],
+    previewTags: ['Next.js', 'NestJS', 'PostgreSQL'],
     implementedFeatures: [
-      'Contratos tipados de extremo a extremo entre apps/web y apps/api mediante TypeScript y tRPC.',
-      'Portal de acceso autenticado, tableros de seguimiento con Recharts y gestión de perfiles.',
-      'Cola en segundo plano con Bull + Redis para exportación asíncrona de CV en PDF.',
-      'Pipeline de integración continua configurado en GitHub Actions y contenedores Docker Compose.',
+      'Contratos tipados de extremo a extremo con TypeScript y tRPC.',
+      'Cola en segundo plano para exportación de CV en PDF.',
+      'Integración continua configurada en GitHub Actions.',
     ],
     howToVerify: [
-      'Visitar https://egresados-system-web.vercel.app (redirige automáticamente al acceso autenticado en /auth/login).',
-      'Revisar el monorepo completo (apps/web y apps/api) en github.com/Prolexis/egresados-system.',
+      'Visitar https://egresados-system-web.vercel.app (acceso /auth/login) y revisar el monorepo en GitHub.',
     ],
     challengesAndLearnings: [
-      'Sacar la generación pesada de PDF con Puppeteer hacia colas Bull/Redis evitó bloqueos en los endpoints principales de la API.',
-      'Sincronizar el cliente web desplegado en Vercel con entornos backend locales/Docker mantuvo ordenados los contratos tRPC.',
+      'Sacar la generación de PDF con Puppeteer hacia Redis/Bull mantuvo fluida la API principal.',
     ],
     verifiedResults: [
-      'Aplicación web desplegada y accesible públicamente en Vercel (redirección activa hacia /auth/login comprobada con HTTP 200).',
-      'Monorepo completo con PostgreSQL, Redis, colas de PDF y CI reproducible.',
+      'Portal web desplegado en Vercel (redirección activa a /auth/login comprobada con HTTP 200).',
     ],
   },
 ];
@@ -457,71 +467,71 @@ export const secondaryProjects: SecondaryProject[] = [
     name: 'Translation Batch App',
     categories: ['IA', 'Web'],
     summary:
-      'Traductor por lotes (.txt, .docx y .pdf) basado en flujo de 4 agentes con LangChain LCEL, Google Gemini, control de cuota con backoff exponencial, revisión en vivo y exportación en ZIP.',
-    stack: ['Python', 'Streamlit', 'LangChain LCEL', 'Google Gemini', 'Docker'],
+      'Traductor por lotes (.txt, .docx y .pdf) con agentes LangChain LCEL + Google Gemini y exportación ZIP.',
+    stack: ['Python', 'Streamlit', 'LangChain'],
     repoUrl: 'https://github.com/Prolexis/translation-batch-app',
-    status: 'App Streamlit documentada',
+    status: 'App Streamlit',
   },
   {
     slug: 'maize-disease-detection',
     name: 'Maize Disease Detection',
     categories: ['IA', 'Datos', 'Web'],
     summary:
-      'Diagnóstico fitosanitario en hojas de maíz con consenso tri-modelo CNN (MobileNetV2, ResNet50, EfficientNetB0) + AutoML, interfaz Next.js 16 (ES/EN/PT), backend FastAPI con WebSockets y tablero Streamlit.',
-    stack: ['TensorFlow', 'XGBoost', 'FastAPI', 'Next.js 16', 'Streamlit'],
+      'Diagnóstico fitosanitario en maíz mediante consenso CNN tri-modelo (MobileNetV2, ResNet50, EfficientNetB0) + Next.js y FastAPI.',
+    stack: ['Python', 'TensorFlow', 'FastAPI'],
     repoUrl: 'https://github.com/Prolexis/maize-disease-detection',
-    status: 'Sistema multimodal full-stack',
+    status: 'Visión computacional',
   },
   {
     slug: 'ciberseguridad-bancaria',
     name: 'AegisBank™ (Ciberseguridad Bancaria)',
     categories: ['Seguridad', 'IA', 'Web'],
     summary:
-      'Plataforma defensiva anti-phishing con análisis vía FastAPI asíncrono, frontend React + TypeScript, PostgreSQL 15, Redis 7, automatización n8n y orquestación LangFlow / Ollama.',
-    stack: ['FastAPI', 'React + TS', 'PostgreSQL', 'Redis', 'n8n / LangFlow'],
+      'Plataforma defensiva anti-phishing con FastAPI asíncrono, React + TypeScript, PostgreSQL y automatización n8n.',
+    stack: ['Python', 'FastAPI', 'React'],
     repoUrl: 'https://github.com/Prolexis/Ciberseguridad_Bancaria',
-    status: 'Plataforma modular defensiva',
+    status: 'Seguridad defensiva',
   },
   {
     slug: 'cryzan-sports',
     name: 'Cryzan Sport E-Commerce',
     categories: ['Web', 'Datos'],
     summary:
-      'Plataforma e-commerce full-stack contenedorizada con Docker, panel analítico de administrador, documentación REST API, portal de privacidad ARCO y suite de pruebas en Vitest.',
-    stack: ['TypeScript', 'Next.js', 'REST API', 'Vitest', 'Docker'],
+      'E-commerce contenedorizado con Docker, panel analítico, documentación REST, privacidad ARCO y pruebas en Vitest.',
+    stack: ['TypeScript', 'Next.js', 'Docker'],
     repoUrl: 'https://github.com/Prolexis/Cryzan_Sports-',
-    status: 'Proyecto full-stack con Vitest',
+    status: 'Full-stack',
   },
   {
     slug: 'tienda-online',
-    name: 'Tienda Online (Vercel Live)',
+    name: 'Tienda Online',
     categories: ['Web'],
     summary:
-      'Aplicación web de comercio electrónico escrita en TypeScript y desplegada públicamente en Vercel con catálogo responsivo y experiencia de compra directa.',
-    stack: ['TypeScript', 'Web Frontend', 'Vercel'],
+      'Aplicación web e-commerce en TypeScript con catálogo responsivo y despliegue público activo en Vercel.',
+    stack: ['TypeScript', 'Frontend Web'],
     repoUrl: 'https://github.com/Prolexis/tienda-online',
     liveDemoUrl: 'https://tienda-online-cyan-beta.vercel.app',
-    status: 'Demo pública activa en Vercel',
+    status: 'Demo en Vercel',
   },
   {
     slug: 'opencv-streamlit-app',
     name: 'OpenCV Streamlit App',
     categories: ['IA', 'Datos'],
     summary:
-      'Aplicación multipágina en Python, OpenCV y Streamlit orientada a detección y procesamiento de imágenes con clasificadores Haar Cascade.',
-    stack: ['Python', 'OpenCV', 'Streamlit', 'Haar Cascade'],
+      'Aplicación multipágina de visión por computador en Python, OpenCV y Streamlit con clasificadores Haar Cascade.',
+    stack: ['Python', 'OpenCV', 'Streamlit'],
     repoUrl: 'https://github.com/Prolexis/OpenCV-Streamlitapp',
-    status: 'App de visión por computador',
+    status: 'OpenCV',
   },
   {
     slug: 'procesamiento-datasets-ml',
     name: 'Procesamiento Datasets ML',
     categories: ['Datos', 'IA'],
     summary:
-      'Herramienta interactiva construida en Python y Streamlit para limpieza, preprocesamiento y exploración reproducible de conjuntos de datos para Machine Learning.',
-    stack: ['Python', 'Streamlit', 'Preprocesamiento ML'],
+      'Herramienta interactiva en Python y Streamlit para limpieza y preparación de datasets orientados a Machine Learning.',
+    stack: ['Python', 'Streamlit'],
     repoUrl: 'https://github.com/Prolexis/Procesamiento_Datasets_ML',
-    status: 'Utilidad analítica ML',
+    status: 'Machine Learning',
   },
 ];
 

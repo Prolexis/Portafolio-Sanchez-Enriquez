@@ -13,10 +13,10 @@ export function ProjectCard({ project }: ProjectCardProps) {
   const remainingStack = project.confirmedStack.length - visibleStack.length;
 
   return (
-    <article className="surface-card surface-card-hover flex h-full flex-col overflow-hidden rounded-2xl">
-      <div className="border-b border-border-subtle bg-[#070A10] p-3">
+    <article className="obsidian-surface obsidian-interactive flex h-full flex-col overflow-hidden rounded-xl">
+      <div className="border-b border-border-subtle bg-bg p-3">
         {leadVisual ? (
-          <div className="relative flex aspect-[16/9] w-full items-center justify-center overflow-hidden rounded-lg border border-border-subtle bg-[#05070C]">
+          <div className="relative flex aspect-[16/10] w-full items-center justify-center overflow-hidden rounded-lg border border-border-subtle bg-[#06080B]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={leadVisual.src}
@@ -30,13 +30,15 @@ export function ProjectCard({ project }: ProjectCardProps) {
         ) : null}
       </div>
 
-      <div className="flex flex-1 flex-col p-5 sm:p-6">
+      <div className="flex flex-1 flex-col p-6">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <div className="flex flex-wrap gap-1.5">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="font-mono text-xs text-accent">{project.indexLabel}</span>
+            <span className="h-3 w-px bg-border-subtle" aria-hidden="true" />
             {project.categories.map((category) => (
               <span
                 key={category}
-                className="rounded-md border border-border-subtle bg-bg-subtle px-2 py-0.5 font-mono text-[11px] text-text-secondary"
+                className="font-mono text-[11px] uppercase tracking-wider text-text-secondary"
               >
                 {category}
               </span>
@@ -47,7 +49,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
         {project.recognitionBadge && (
           <div className="mt-3">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-accent/35 bg-accent/10 px-2.5 py-0.5 text-xs font-medium text-accent">
+            <span className="inline-flex items-center gap-1.5 rounded-md border border-accent/35 bg-accent/10 px-2.5 py-0.5 text-xs font-medium text-accent">
               <Award className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
               <span>{project.recognitionBadge}</span>
             </span>
@@ -65,19 +67,17 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
         <p className="mt-2 text-sm leading-relaxed text-text-secondary">{project.tagline}</p>
 
-        <p className="mt-3 text-xs leading-relaxed text-text-muted">{project.status}</p>
-
         <div className="mt-4 flex flex-wrap gap-1.5">
           {visibleStack.map((tech) => (
             <span
               key={tech}
-              className="rounded-md border border-border-subtle bg-bg px-2 py-1 text-xs text-text-secondary"
+              className="rounded border border-border-subtle bg-bg px-2 py-0.5 text-xs text-text-secondary"
             >
               {tech}
             </span>
           ))}
           {remainingStack > 0 && (
-            <span className="rounded-md border border-border-subtle bg-bg px-2 py-1 font-mono text-xs text-text-muted">
+            <span className="rounded border border-border-subtle bg-bg px-2 py-0.5 font-mono text-xs text-text-muted">
               +{remainingStack}
             </span>
           )}
@@ -88,7 +88,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
             href={`/proyectos/${project.slug}`}
             className="inline-flex items-center gap-1.5 font-medium text-accent transition-colors hover:text-accent-hover"
           >
-            <span>Ver caso de estudio</span>
+            <span>Caso de estudio</span>
             <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
           </Link>
 
@@ -98,7 +98,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 href={project.liveDemoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-xs font-medium text-text-primary transition-colors hover:text-accent"
+                className="inline-flex items-center gap-1 text-xs font-mono text-text-primary transition-colors hover:text-accent"
               >
                 <span>Demo</span>
                 <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
@@ -109,9 +109,9 @@ export function ProjectCard({ project }: ProjectCardProps) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`Repositorio GitHub de ${project.name}`}
-              className="inline-flex items-center gap-1 text-xs font-medium text-text-secondary transition-colors hover:text-text-primary"
+              className="inline-flex items-center gap-1 text-xs font-mono text-text-secondary transition-colors hover:text-text-primary"
             >
-              <GitBranch className="h-3.5 w-3.5" aria-hidden="true" />
+              <GitBranch className="h-3.5 w-3.5 text-accent" aria-hidden="true" />
               <span>GitHub</span>
             </a>
           </div>

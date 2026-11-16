@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       canonical: `/proyectos/${project.slug}`,
     },
     openGraph: {
-      title: `${project.name} — Caso de estudio | ${profile.shortName}`,
+      title: `${project.name} — Caso de estudio | ${profile.monogram}`,
       description: project.tagline,
       url: absoluteUrl(`/proyectos/${project.slug}`),
       images: [{ url: absoluteUrl(image), alt: project.name }],
@@ -84,299 +84,315 @@ export default async function ProjectDetailPage({ params }: PageProps) {
   };
 
   return (
-    <article className="mx-auto max-w-5xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
-      <nav aria-label="Migas de pan" className="mb-6 flex items-center gap-2 text-xs text-text-muted">
-        <Link href="/proyectos" className="inline-flex items-center gap-1.5 text-text-secondary hover:text-accent">
-          <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" />
-          <span>Proyectos</span>
-        </Link>
-        <span aria-hidden="true">/</span>
-        <span className="text-text-primary">{project.name}</span>
-      </nav>
-
-      {/* CABECERA */}
-      <header className="border-b border-border-subtle pb-8">
-        <div className="flex flex-wrap items-center gap-2">
-          {project.categories.map((cat) => (
-            <span
-              key={cat}
-              className="rounded-md border border-border-subtle bg-bg-card px-2.5 py-0.5 font-mono text-xs text-text-secondary"
-            >
-              {cat}
-            </span>
-          ))}
-          <span className="font-mono text-xs text-text-muted">· {project.year}</span>
-          {project.recognitionBadge && (
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-accent/35 bg-accent/10 px-3 py-0.5 text-xs font-medium text-accent">
-              <Award className="h-3.5 w-3.5" aria-hidden="true" />
-              <span>{project.recognitionBadge}</span>
-            </span>
-          )}
-        </div>
-
-        <h1 className="mt-4 font-display text-3xl font-semibold tracking-tight text-text-primary sm:text-4xl lg:text-5xl">
-          {project.name}
-        </h1>
-
-        <p className="mt-4 max-w-3xl text-base leading-relaxed text-text-secondary sm:text-lg">
-          {project.tagline}
-        </p>
-
-        <div className="mt-6 grid gap-3 rounded-xl border border-border-subtle bg-bg-elevated p-4 text-xs sm:grid-cols-2 sm:text-sm">
-          <div className="flex items-start gap-2.5">
-            <Users className="mt-0.5 h-4 w-4 shrink-0 text-accent" aria-hidden="true" />
-            <div>
-              <p className="font-semibold text-text-primary">Contexto y colaboración</p>
-              <p className="mt-0.5 text-text-secondary">{project.collaborationNote}</p>
-            </div>
-          </div>
-          <div className="flex items-start gap-2.5">
-            <Layers className="mt-0.5 h-4 w-4 shrink-0 text-accent" aria-hidden="true" />
-            <div>
-              <p className="font-semibold text-text-primary">Rol y estado técnico</p>
-              <p className="mt-0.5 text-text-secondary">{project.roleVerified}</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-6 flex flex-wrap gap-3">
-          <a
-            href={project.repoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-lg bg-accent px-4 py-2.5 text-sm font-semibold text-[#060911] transition-colors hover:bg-accent-hover"
+    <article className="bg-ivory text-ink">
+      {/* Cabecera oscura de alto contraste */}
+      <header className="bg-carbon py-12 text-white sm:py-16">
+        <div className="atelier-container max-w-5xl">
+          <nav
+            aria-label="Migas de pan"
+            className="mb-8 flex items-center gap-2 font-mono text-xs text-editorial-muted"
           >
-            <GitBranch className="h-4 w-4" aria-hidden="true" />
-            <span>Ver repositorio en GitHub</span>
-          </a>
+            <Link
+              href="/proyectos"
+              className="inline-flex items-center gap-1.5 transition-colors hover:text-white"
+            >
+              <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" />
+              <span>Proyectos</span>
+            </Link>
+            <span aria-hidden="true">/</span>
+            <span className="text-white">
+              {project.indexLabel} · {project.name}
+            </span>
+          </nav>
 
-          {project.liveDemoUrl && (
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="font-mono text-sm font-semibold text-cobalt-soft">
+              {project.indexLabel}
+            </span>
+            <span className="h-px w-6 bg-white/20" aria-hidden="true" />
+            {project.categories.map((cat) => (
+              <span
+                key={cat}
+                className="font-mono text-xs uppercase tracking-[0.1em] text-editorial-muted"
+              >
+                {cat}
+              </span>
+            ))}
+            <span className="font-mono text-xs text-editorial-muted">· {project.year}</span>
+            {project.recognitionBadge && (
+              <span className="inline-flex items-center gap-1.5 rounded-md bg-cobalt/20 px-3 py-1 text-xs font-medium text-cobalt-soft ring-1 ring-cobalt/40">
+                <Award className="h-3.5 w-3.5" aria-hidden="true" />
+                <span>{project.recognitionBadge}</span>
+              </span>
+            )}
+          </div>
+
+          <h1 className="atelier-section-title mt-5 font-display font-semibold text-white">
+            {project.name}
+          </h1>
+
+          <p className="mt-4 max-w-3xl text-base leading-relaxed text-editorial-muted sm:text-lg">
+            {project.tagline}
+          </p>
+
+          <div className="mt-8 grid gap-4 rounded-xl border border-white/10 bg-obsidian/70 p-5 text-xs sm:grid-cols-2 sm:text-sm">
+            <div className="flex items-start gap-3">
+              <Users className="mt-0.5 h-4 w-4 shrink-0 text-cobalt-soft" aria-hidden="true" />
+              <div>
+                <p className="font-semibold text-white">Contexto y colaboración</p>
+                <p className="mt-1 leading-relaxed text-editorial-muted">
+                  {project.collaborationNote}
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <Layers className="mt-0.5 h-4 w-4 shrink-0 text-cobalt-soft" aria-hidden="true" />
+              <div>
+                <p className="font-semibold text-white">Participación verificable</p>
+                <p className="mt-1 leading-relaxed text-editorial-muted">{project.roleVerified}</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-7 flex flex-wrap gap-3">
             <a
-              href={project.liveDemoUrl}
+              href={project.repoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg border border-border-strong bg-bg-card px-4 py-2.5 text-sm font-medium text-text-primary transition-colors hover:border-accent/50"
+              className="inline-flex items-center gap-2 rounded-md bg-cobalt px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-cobalt-hover"
             >
-              <span>{project.liveDemoLabel || 'Abrir demo desplegada'}</span>
-              <ExternalLink className="h-4 w-4 text-accent" aria-hidden="true" />
+              <GitBranch className="h-4 w-4" aria-hidden="true" />
+              <span>Ver repositorio en GitHub</span>
             </a>
-          )}
+
+            {project.liveDemoUrl && (
+              <a
+                href={project.liveDemoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-md border border-white/20 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:border-white/40"
+              >
+                <span>{project.liveDemoLabel || 'Abrir aplicación'}</span>
+                <ExternalLink className="h-4 w-4 text-cobalt-soft" aria-hidden="true" />
+              </a>
+            )}
+          </div>
         </div>
       </header>
 
-      {/* AVISO DE ALCANCE / DISCLAMER CUANDO CORRESPONDE */}
-      {project.disclaimer && (
-        <aside
-          aria-label="Nota técnica de alcance"
-          className="mt-8 flex items-start gap-3 rounded-xl border border-amber-400/25 bg-amber-500/10 p-4 text-sm text-amber-100/90"
-        >
-          <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-amber-300" aria-hidden="true" />
-          <p className="leading-relaxed">{project.disclaimer}</p>
-        </aside>
-      )}
-
-      {/* EVIDENCIA VISUAL O ARQUITECTURA */}
-      <section className="mt-10" aria-labelledby="visuals-heading">
-        <h2
-          id="visuals-heading"
-          className="mb-4 font-display text-xl font-semibold text-text-primary"
-        >
-          {project.visuals.length > 0
-            ? 'Evidencia visual y diagramas del proyecto'
-            : 'Arquitectura conceptual del sistema'}
-        </h2>
-
-        {project.visuals.length > 0 ? (
-          <ProjectVisualGallery projectName={project.name} visuals={project.visuals} />
-        ) : project.architectureKind ? (
-          <ProjectArchitectureDiagram kind={project.architectureKind} />
-        ) : null}
-      </section>
-
-      {/* RECONOCIMIENTO VINCULADO (EJ. VASOCHAIN UNT) */}
-      {relatedAchievement && relatedAchievement.imagePath && (
-        <section className="mt-10" aria-labelledby="achievement-linked-heading">
-          <h2
-            id="achievement-linked-heading"
-            className="mb-4 font-display text-xl font-semibold text-text-primary"
+      {/* Cuerpo editorial en Marfil */}
+      <div className="atelier-container max-w-5xl py-12 sm:py-16">
+        {project.disclaimer && (
+          <aside
+            aria-label="Nota técnica de alcance"
+            className="mb-10 flex items-start gap-3 rounded-xl border border-amber-600/30 bg-amber-50 p-4 text-sm text-amber-950"
           >
-            Documento institucional asociado
-          </h2>
-          <DocumentPreviewCard
-            achievement={relatedAchievement}
-            horizontal
-            ctaText="Ver documento completo"
-          />
+            <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-amber-700" aria-hidden="true" />
+            <p className="leading-relaxed">{project.disclaimer}</p>
+          </aside>
+        )}
+
+        {/* Problema y Solución */}
+        <section className="grid gap-6 md:grid-cols-2">
+          <div className="rounded-xl border border-editorial-borderLight bg-white p-6">
+            <p className="font-mono text-xs uppercase tracking-[0.14em] text-cobalt">
+              01 · Problema identificado
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-editorial-inkMuted sm:text-base">
+              {project.problem}
+            </p>
+          </div>
+
+          <div className="rounded-xl border border-editorial-borderLight bg-white p-6">
+            <p className="font-mono text-xs uppercase tracking-[0.14em] text-cobalt">
+              02 · Solución propuesta
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-editorial-inkMuted sm:text-base">
+              {project.solution}
+            </p>
+          </div>
         </section>
-      )}
 
-      {/* PROBLEMA Y SOLUCIÓN */}
-      <section className="mt-12 grid gap-6 md:grid-cols-2">
-        <div className="surface-card rounded-2xl p-6">
-          <p className="font-mono text-xs uppercase tracking-wider text-accent">01 · Problema</p>
-          <p className="mt-3 text-sm leading-relaxed text-text-secondary sm:text-base">
-            {project.problem}
-          </p>
-        </div>
-
-        <div className="surface-card rounded-2xl p-6">
-          <p className="font-mono text-xs uppercase tracking-wider text-accent">02 · Solución</p>
-          <p className="mt-3 text-sm leading-relaxed text-text-secondary sm:text-base">
-            {project.solution}
-          </p>
-        </div>
-      </section>
-
-      {/* ARQUITECTURA & STACK */}
-      <section className="mt-10 grid gap-6 lg:grid-cols-12">
-        <div className="surface-card rounded-2xl p-6 lg:col-span-7">
-          <h2 className="font-display text-xl font-semibold text-text-primary">
-            Resumen arquitectónico
-          </h2>
-          <ul className="mt-4 space-y-3">
-            {project.architectureSummary.map((item) => (
-              <li key={item} className="flex items-start gap-2.5 text-sm text-text-secondary">
-                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-accent" aria-hidden="true" />
-                <span className="leading-relaxed">{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="surface-card rounded-2xl p-6 lg:col-span-5">
-          <h2 className="font-display text-xl font-semibold text-text-primary">
-            Stack confirmado
-          </h2>
-          <div className="mt-4 flex flex-wrap gap-2">
-            {project.confirmedStack.map((tech) => (
-              <span
-                key={tech}
-                className="rounded-lg border border-border-strong bg-bg px-3 py-1.5 text-xs font-medium text-text-primary"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-          <p className="mt-4 border-t border-border-subtle pt-4 text-xs text-text-muted">
-            Estado: {project.status}
-          </p>
-        </div>
-      </section>
-
-      {/* FUNCIONALIDADES Y RESULTADOS */}
-      <section className="mt-10 grid gap-6 md:grid-cols-2">
-        <div className="surface-card rounded-2xl p-6">
-          <h2 className="font-display text-xl font-semibold text-text-primary">
-            Funcionalidades implementadas
-          </h2>
-          <ul className="mt-4 space-y-2.5 text-sm text-text-secondary">
-            {project.implementedFeatures.map((feat) => (
-              <li key={feat} className="flex items-start gap-2.5">
-                <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden="true" />
-                <span className="leading-relaxed">{feat}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="surface-card rounded-2xl p-6">
-          <h2 className="font-display text-xl font-semibold text-text-primary">
-            Resultados verificables
-          </h2>
-          <ul className="mt-4 space-y-2.5 text-sm text-text-secondary">
-            {project.verifiedResults.map((res) => (
-              <li key={res} className="flex items-start gap-2.5">
-                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" aria-hidden="true" />
-                <span className="leading-relaxed">{res}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* RETOS + CÓMO VERIFICAR */}
-      <section className="mt-10 grid gap-6 md:grid-cols-2">
-        <div className="surface-card rounded-2xl p-6">
-          <h2 className="font-display text-xl font-semibold text-text-primary">
-            Retos técnicos y aprendizajes
-          </h2>
-          <ul className="mt-4 space-y-3 text-sm text-text-secondary">
-            {project.challengesAndLearnings.map((item) => (
-              <li key={item} className="leading-relaxed">
-                • {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="surface-card rounded-2xl p-6">
-          <div className="flex items-center gap-2">
-            <Terminal className="h-4 w-4 text-accent" aria-hidden="true" />
-            <h2 className="font-display text-xl font-semibold text-text-primary">
-              Cómo verificar este proyecto
+        {/* Capturas y/o Arquitectura técnica dentro del caso de estudio */}
+        {project.visuals.length > 0 && (
+          <section className="mt-12" aria-labelledby="visuals-heading">
+            <h2
+              id="visuals-heading"
+              className="mb-5 font-display text-2xl font-semibold text-ink"
+            >
+              Capturas y evidencia visual
             </h2>
+            <ProjectVisualGallery projectName={project.name} visuals={project.visuals} />
+          </section>
+        )}
+
+        {project.architectureKind && (
+          <section className="mt-12" aria-labelledby="arch-heading">
+            <h2
+              id="arch-heading"
+              className="mb-5 font-display text-2xl font-semibold text-ink"
+            >
+              Arquitectura del sistema
+            </h2>
+            <ProjectArchitectureDiagram kind={project.architectureKind} />
+          </section>
+        )}
+
+        {relatedAchievement && relatedAchievement.imagePath && (
+          <section className="mt-12" aria-labelledby="achievement-linked-heading">
+            <h2
+              id="achievement-linked-heading"
+              className="mb-5 font-display text-2xl font-semibold text-ink"
+            >
+              Reconocimiento asociado
+            </h2>
+            <DocumentPreviewCard
+              achievement={relatedAchievement}
+              horizontal
+              ctaText="Ampliar documento"
+            />
+          </section>
+        )}
+
+        {/* Tecnologías, Arquitectura detallada y Resultados */}
+        <section className="mt-12 grid gap-6 lg:grid-cols-12">
+          <div className="rounded-xl border border-editorial-borderLight bg-white p-6 lg:col-span-7">
+            <h2 className="font-display text-xl font-semibold text-ink">
+              Decisiones técnicas y módulos
+            </h2>
+            <ul className="mt-4 space-y-3">
+              {project.architectureSummary.map((item) => (
+                <li key={item} className="flex items-start gap-2.5 text-sm text-editorial-inkMuted">
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-cobalt" aria-hidden="true" />
+                  <span className="leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
-          <ol className="mt-4 space-y-2.5 text-sm text-text-secondary">
-            {project.howToVerify.map((step, idx) => (
-              <li key={step} className="flex items-start gap-2.5">
-                <span className="font-mono text-xs font-semibold text-accent">0{idx + 1}.</span>
-                <span className="leading-relaxed">{step}</span>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
 
-      {/* NAVEGACIÓN ENTRE CASOS */}
-      <nav
-        aria-label="Navegación entre casos de estudio"
-        className="mt-12 grid gap-4 border-t border-border-subtle pt-8 sm:grid-cols-2"
-      >
-        {prev ? (
-          <Link
-            href={`/proyectos/${prev.slug}`}
-            className="surface-card surface-card-hover flex items-center justify-between gap-4 rounded-xl p-4"
-          >
-            <div>
-              <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">
-                Caso anterior
-              </p>
-              <p className="mt-1 font-display text-base font-semibold text-text-primary">
-                {prev.name}
-              </p>
+          <div className="rounded-xl border border-editorial-borderLight bg-white p-6 lg:col-span-5">
+            <h2 className="font-display text-xl font-semibold text-ink">
+              Stack tecnológico
+            </h2>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {project.confirmedStack.map((tech) => (
+                <span
+                  key={tech}
+                  className="rounded border border-editorial-borderLight bg-ivory px-3 py-1.5 text-xs font-medium text-ink"
+                >
+                  {tech}
+                </span>
+              ))}
             </div>
-            <ArrowLeft className="h-4 w-4 shrink-0 text-accent" aria-hidden="true" />
-          </Link>
-        ) : (
-          <div />
-        )}
+            <p className="mt-5 border-t border-editorial-borderLight pt-4 font-mono text-[11px] text-editorial-inkMuted">
+              {project.status}
+            </p>
+          </div>
+        </section>
 
-        {next && (
-          <Link
-            href={`/proyectos/${next.slug}`}
-            className="surface-card surface-card-hover flex items-center justify-between gap-4 rounded-xl p-4 text-right sm:justify-end"
-          >
-            <div>
-              <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">
-                Siguiente caso
-              </p>
-              <p className="mt-1 font-display text-base font-semibold text-text-primary">
-                {next.name}
-              </p>
+        <section className="mt-8 grid gap-6 md:grid-cols-2">
+          <div className="rounded-xl border border-editorial-borderLight bg-white p-6">
+            <h2 className="font-display text-xl font-semibold text-ink">
+              Funcionalidades principales
+            </h2>
+            <ul className="mt-4 space-y-2.5 text-sm text-editorial-inkMuted">
+              {project.implementedFeatures.map((feat) => (
+                <li key={feat} className="flex items-start gap-2.5">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-cobalt" aria-hidden="true" />
+                  <span className="leading-relaxed">{feat}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="rounded-xl border border-editorial-borderLight bg-white p-6">
+            <h2 className="font-display text-xl font-semibold text-ink">
+              Resultados sustentados
+            </h2>
+            <ul className="mt-4 space-y-2.5 text-sm text-editorial-inkMuted">
+              {project.verifiedResults.map((res) => (
+                <li key={res} className="flex items-start gap-2.5">
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" aria-hidden="true" />
+                  <span className="leading-relaxed">{res}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        <section className="mt-8 grid gap-6 md:grid-cols-2">
+          <div className="rounded-xl border border-editorial-borderLight bg-white p-6">
+            <h2 className="font-display text-xl font-semibold text-ink">
+              Aprendizajes clave
+            </h2>
+            <ul className="mt-4 space-y-3 text-sm text-editorial-inkMuted">
+              {project.challengesAndLearnings.map((item) => (
+                <li key={item} className="leading-relaxed">
+                  • {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="rounded-xl border border-editorial-borderLight bg-white p-6">
+            <div className="flex items-center gap-2">
+              <Terminal className="h-4 w-4 text-cobalt" aria-hidden="true" />
+              <h2 className="font-display text-xl font-semibold text-ink">
+                Verificación en código
+              </h2>
             </div>
-            <ArrowRight className="h-4 w-4 shrink-0 text-accent" aria-hidden="true" />
-          </Link>
-        )}
-      </nav>
+            <ol className="mt-4 space-y-2.5 text-sm text-editorial-inkMuted">
+              {project.howToVerify.map((step, idx) => (
+                <li key={step} className="flex items-start gap-2.5">
+                  <span className="font-mono text-xs font-semibold text-cobalt">0{idx + 1}.</span>
+                  <span className="leading-relaxed">{step}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
 
-      <div className="mt-6 text-center">
-        <Link
-          href="/proyectos"
-          className="inline-flex items-center gap-2 text-sm font-medium text-accent hover:text-accent-hover"
+        {/* Navegación entre casos */}
+        <nav
+          aria-label="Navegación entre casos de estudio"
+          className="mt-14 grid gap-4 border-t border-editorial-borderLight pt-8 sm:grid-cols-2"
         >
-          <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-          <span>Volver a todos los proyectos</span>
-        </Link>
+          {prev ? (
+            <Link
+              href={`/proyectos/${prev.slug}`}
+              className="flex items-center justify-between gap-4 rounded-xl border border-editorial-borderLight bg-white p-5 transition-colors hover:border-ink/30"
+            >
+              <div>
+                <p className="font-mono text-[11px] uppercase tracking-wider text-editorial-inkMuted">
+                  Caso anterior
+                </p>
+                <p className="mt-1 font-display text-base font-semibold text-ink">
+                  {prev.indexLabel} · {prev.name}
+                </p>
+              </div>
+              <ArrowLeft className="h-4 w-4 shrink-0 text-cobalt" aria-hidden="true" />
+            </Link>
+          ) : (
+            <div />
+          )}
+
+          {next && (
+            <Link
+              href={`/proyectos/${next.slug}`}
+              className="flex items-center justify-between gap-4 rounded-xl border border-editorial-borderLight bg-white p-5 text-right transition-colors hover:border-ink/30 sm:justify-end"
+            >
+              <div>
+                <p className="font-mono text-[11px] uppercase tracking-wider text-editorial-inkMuted">
+                  Siguiente caso
+                </p>
+                <p className="mt-1 font-display text-base font-semibold text-ink">
+                  {next.indexLabel} · {next.name}
+                </p>
+              </div>
+              <ArrowRight className="h-4 w-4 shrink-0 text-cobalt" aria-hidden="true" />
+            </Link>
+          )}
+        </nav>
       </div>
 
       <script

@@ -1,75 +1,67 @@
 import Link from 'next/link';
-import { ArrowUpRight, Mail } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { profile } from '@/data/profile';
-import { MonogramCS } from '@/components/ui/MonogramCS';
-import { CopyEmailButton } from '@/components/ui/CopyEmailButton';
+import { BrandWordmark } from '@/components/ui/MonogramCS';
 
 export function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="border-t border-border-subtle bg-bg">
-      <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid gap-8 md:grid-cols-12 md:items-start">
+    <footer className="border-t border-white/10 bg-obsidian text-white">
+      <div className="atelier-container py-12 lg:py-16">
+        <div className="grid gap-10 md:grid-cols-12 md:items-start">
           <div className="md:col-span-5">
-            <div className="flex items-center gap-3">
-              <MonogramCS className="h-9 w-9" />
-              <div>
-                <p className="font-display text-base font-semibold text-text-primary">
-                  {profile.brandLabel}
-                </p>
-                <p className="text-xs text-text-muted">
-                  {profile.university} · {profile.location}
-                </p>
-              </div>
-            </div>
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-text-secondary">
-              Portafolio de ingeniería en desarrollo full-stack, inteligencia artificial aplicada y
-              sistemas de datos con foco en evidencia y claridad arquitectónica.
+            <Link href="/" className="inline-block">
+              <BrandWordmark className="text-2xl" />
+            </Link>
+            <p className="mt-3 max-w-sm text-sm leading-relaxed text-editorial-muted">
+              {profile.fullName} · {profile.career} en la {profile.university}.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:col-span-7">
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 md:col-span-7">
             <div>
-              <h2 className="font-mono text-xs uppercase tracking-wider text-text-muted">
-                Rutas
+              <h2 className="font-mono text-[11px] uppercase tracking-[0.14em] text-editorial-muted">
+                Explorar
               </h2>
-              <ul className="mt-3 space-y-2 text-sm">
+              <ul className="mt-3.5 space-y-2.5 text-sm">
                 <li>
-                  <Link href="/" className="text-text-secondary transition-colors hover:text-text-primary">
+                  <Link href="/" className="text-white/80 transition-colors hover:text-white">
                     Inicio
                   </Link>
                 </li>
                 <li>
-                  <Link href="/proyectos" className="text-text-secondary transition-colors hover:text-text-primary">
+                  <Link href="/proyectos" className="text-white/80 transition-colors hover:text-white">
                     Proyectos
                   </Link>
                 </li>
                 <li>
-                  <Link href="/sobre-mi" className="text-text-secondary transition-colors hover:text-text-primary">
-                    Sobre mí
+                  <Link href="/logros" className="text-white/80 transition-colors hover:text-white">
+                    Logros
                   </Link>
                 </li>
                 <li>
-                  <Link href="/logros" className="text-text-secondary transition-colors hover:text-text-primary">
-                    Logros
+                  <Link href="/sobre-mi" className="text-white/80 transition-colors hover:text-white">
+                    Sobre mí
                   </Link>
                 </li>
               </ul>
             </div>
 
             <div>
-              <h2 className="font-mono text-xs uppercase tracking-wider text-text-muted">
-                Perfiles
+              <h2 className="font-mono text-[11px] uppercase tracking-[0.14em] text-editorial-muted">
+                Redes
               </h2>
-              <ul className="mt-3 space-y-2 text-sm">
+              <ul className="mt-3.5 space-y-2.5 text-sm">
                 <li>
                   <a
                     href={profile.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-text-secondary transition-colors hover:text-text-primary"
+                    className="inline-flex items-center gap-1 text-white/80 transition-colors hover:text-white"
                   >
                     <span>GitHub</span>
-                    <ArrowUpRight className="h-3.5 w-3.5 text-accent" aria-hidden="true" />
+                    <ArrowUpRight className="h-3.5 w-3.5 text-cobalt-soft" aria-hidden="true" />
                   </a>
                 </li>
                 <li>
@@ -77,38 +69,35 @@ export function Footer() {
                     href={profile.linkedinUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-text-secondary transition-colors hover:text-text-primary"
+                    className="inline-flex items-center gap-1 text-white/80 transition-colors hover:text-white"
                   >
                     <span>LinkedIn</span>
-                    <ArrowUpRight className="h-3.5 w-3.5 text-accent" aria-hidden="true" />
+                    <ArrowUpRight className="h-3.5 w-3.5 text-cobalt-soft" aria-hidden="true" />
                   </a>
                 </li>
               </ul>
             </div>
 
             <div className="col-span-2 sm:col-span-1">
-              <h2 className="font-mono text-xs uppercase tracking-wider text-text-muted">
-                Contacto directo
+              <h2 className="font-mono text-[11px] uppercase tracking-[0.14em] text-editorial-muted">
+                Correo
               </h2>
-              <div className="mt-3 space-y-2.5">
-                <a
-                  href={`mailto:${profile.email}`}
-                  className="inline-flex items-center gap-1.5 break-all text-sm text-text-primary transition-colors hover:text-accent"
-                >
-                  <Mail className="h-4 w-4 shrink-0 text-accent" aria-hidden="true" />
-                  <span>{profile.email}</span>
-                </a>
-                <div>
-                  <CopyEmailButton email={profile.email} variant="compact" />
-                </div>
-              </div>
+              <a
+                href={`mailto:${profile.email}`}
+                className="mt-3.5 block break-all text-sm text-white transition-colors hover:text-cobalt-soft"
+              >
+                {profile.email}
+              </a>
             </div>
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col justify-between gap-2 border-t border-border-subtle pt-6 text-xs text-text-muted sm:flex-row sm:items-center">
-          <p>{profile.fullName} — Portafolio técnico</p>
-          <p>Construido con Next.js, TypeScript y Tailwind CSS</p>
+        <div className="mt-10 flex flex-col justify-between gap-3 border-t border-white/10 pt-6 text-xs text-editorial-muted sm:flex-row sm:items-center">
+          <div className="flex items-center gap-2.5">
+            <span className="h-1.5 w-1.5 rounded-full bg-cobalt" aria-hidden="true" />
+            <span>{profile.location} · Atelier / Engineering</span>
+          </div>
+          <p className="font-mono">© {currentYear} {profile.shortName}</p>
         </div>
       </div>
     </footer>

@@ -1,5 +1,6 @@
-import { ArrowRight, Boxes, CloudRain, Database, GraduationCap, ShieldCheck } from 'lucide-react';
+import { ArrowRight, CloudRain, GraduationCap, ShieldCheck } from 'lucide-react';
 import type { ArchitectureDiagramKind } from '@/data/projects';
+import { cn } from '@/lib/utils';
 
 interface DiagramNode {
   title: string;
@@ -16,80 +17,80 @@ const diagramData: Record<
   }
 > = {
   vasochain: {
-    header: 'VasoChain AI — Flujo conceptual de trazabilidad',
-    caption: 'Diagrama conceptual basado en arquitectura Docker Compose de 4 servicios (:5174, :3001, :5433, :8545).',
+    header: 'VasoChainAI · Flujo de trazabilidad y verificación',
+    caption: 'Basado en arquitectura Docker Compose de 4 servicios (:5174, :3001, :5433, :8545).',
     nodes: [
       {
-        title: 'Canal WhatsApp + React UI',
-        subtitle: 'Simulador / Whapi / Twilio y panel operativo en puerto :5174',
-        tag: 'Entrada & Operación',
+        title: 'WhatsApp + Panel React',
+        subtitle: 'Simulador local / Whapi / Twilio e interfaz operativa (:5174)',
+        tag: 'Ingesta',
       },
       {
         title: 'NestJS API + Claude Vision',
-        subtitle: 'Autenticación, validación con arnés (13 controles) y análisis de evidencia (:3001)',
-        tag: 'Orquestación',
+        subtitle: 'Autenticación, 13 controles automatizados y verificación visual (:3001)',
+        tag: 'Validación IA',
       },
       {
         title: 'PostgreSQL + Prisma',
-        subtitle: 'Registro estructurado de beneficiarios, entregas y auditoría (:5433)',
+        subtitle: 'Beneficiarios, entregas y auditoría relacional (:5433)',
         tag: 'Persistencia',
       },
       {
         title: 'Hardhat · DeliveryRegistry.sol',
         subtitle: 'Anclaje criptográfico inmutable de hashes de entrega (:8545)',
-        tag: 'Evidencia on-chain',
+        tag: 'Blockchain',
       },
     ],
   },
   'yaku-alert': {
-    header: 'YAKU ALERT UNT — Arquitectura geoespacial preventiva',
-    caption: 'Diagrama conceptual basado en el prototipo de Hackathon Innova Norte 3G 2026 (Desafío 3).',
+    header: 'YAKU ALERT UNT · Motor geoespacial preventivo',
+    caption: 'Prototipo para Desafío 3 (Hackathon Innova Norte 3G 2026) bajo marco Ley N.° 29664.',
     nodes: [
       {
         title: 'Open-Meteo + Respaldo Offline',
-        subtitle: 'Ingesta meteorológica IPv4 con degradación controlada ante cortes de red',
-        tag: 'Datos externos',
+        subtitle: 'Lectura meteorológica IPv4 con degradación controlada',
+        tag: 'Datos',
       },
       {
         title: 'FastAPI + Shapely 2.x',
-        subtitle: 'Análisis geométrico de corredores hídricos e intersección territorial (:8000)',
-        tag: 'Motor espacial',
+        subtitle: 'Geometría de corredores hídricos validada con pytest (:8000)',
+        tag: 'Análisis',
       },
       {
         title: 'React + Leaflet (3 vistas)',
-        subtitle: 'Monitoreo, Mapa/Escenarios diferenciados y Respuesta UNT (:8080)',
-        tag: 'Interfaz',
+        subtitle: 'Monitoreo, Mapa/Escenarios y Respuesta UNT (:8080)',
+        tag: 'Cartografía',
       },
       {
-        title: 'Marco Ley N.° 29664',
-        subtitle: 'Prototipo informativo; sin recolección PII y separado de alertas oficiales',
+        title: 'Criterio SINAGERD',
+        subtitle: 'Separación estricta entre pronóstico y simulación sin captura PII',
         tag: 'Gobernanza',
       },
     ],
   },
   egresados: {
-    header: 'EgresadosNet — Monorepo full-stack y generación asíncrona',
-    caption: 'Diagrama conceptual de separación web, API tipada tRPC/Prisma y procesamiento en colas.',
+    header: 'Egresados System · Monorepo y workers asíncronos',
+    caption: 'Separación modular apps/web (Vercel) + apps/api (NestJS/tRPC/Prisma/Redis).',
     nodes: [
       {
         title: 'Next.js 14 + Zustand',
-        subtitle: 'Cliente web desplegado en Vercel con tableros Recharts (apps/web)',
-        tag: 'Frontend Vercel',
+        subtitle: 'Portal web desplegado en Vercel con analítica Recharts (apps/web)',
+        tag: 'Cliente Web',
       },
       {
         title: 'NestJS 10 + tRPC + JWT',
-        subtitle: 'Contratos end-to-end tipados y autorización Passport (apps/api)',
+        subtitle: 'Contratos tipados de extremo a extremo y autorización Passport',
         tag: 'API Tipada',
       },
       {
         title: 'PostgreSQL 15 + Prisma',
-        subtitle: 'Esquema relacional de egresados, empleabilidad y convocatorias',
-        tag: 'Base de datos',
+        subtitle: 'Modelo relacional de egresados y empleabilidad',
+        tag: 'Datos',
       },
       {
         title: 'Redis 7 + Bull + Puppeteer',
-        subtitle: 'Cola en segundo plano para generación asíncrona de CV en PDF',
-        tag: 'Workers PDF',
+        subtitle: 'Generación asíncrona de currículums en PDF en segundo plano',
+        tag: 'Workers',
       },
     ],
   },
@@ -98,9 +99,11 @@ const diagramData: Record<
 export function ProjectArchitectureDiagram({
   kind,
   compact = false,
+  className,
 }: {
   kind: ArchitectureDiagramKind;
   compact?: boolean;
+  className?: string;
 }) {
   const data = diagramData[kind];
 
@@ -112,57 +115,56 @@ export function ProjectArchitectureDiagram({
         : GraduationCap;
 
   return (
-    <div className="rounded-xl border border-border-subtle bg-[#070A10] p-4 sm:p-5">
-      <div className="mb-3 flex flex-wrap items-center justify-between gap-2 border-b border-border-subtle pb-2.5">
+    <div
+      className={cn(
+        'flex h-full flex-col justify-between rounded-lg border border-border-subtle bg-bg p-4 sm:p-6',
+        className
+      )}
+    >
+      <div className="mb-4 flex flex-wrap items-center justify-between gap-2 border-b border-border-subtle pb-3">
         <div className="flex items-center gap-2 text-xs font-medium text-text-primary">
           <Icon className="h-4 w-4 shrink-0 text-accent" aria-hidden="true" />
           <span>{data.header}</span>
         </div>
-        <span className="inline-flex items-center gap-1 rounded border border-accent/30 bg-accent/10 px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-accent">
-          <Boxes className="h-3 w-3" aria-hidden="true" />
+        <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-text-muted">
           Arquitectura conceptual
         </span>
       </div>
 
       <div
-        className={
-          compact
-            ? 'grid grid-cols-1 gap-2 sm:grid-cols-2'
-            : 'grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4'
-        }
+        className={cn(
+          'grid gap-3',
+          compact ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1 sm:grid-cols-2'
+        )}
       >
         {data.nodes.map((node, index) => (
           <div
             key={node.title}
-            className="relative flex flex-col justify-between rounded-lg border border-border-subtle bg-bg-elevated p-3"
+            className="flex flex-col justify-between rounded-md border border-border-subtle bg-bg-elevated p-3.5"
           >
             <div>
-              <span className="inline-block font-mono text-[10px] uppercase tracking-wider text-accent">
-                0{index + 1} · {node.tag}
-              </span>
-              <p className="mt-1 font-display text-xs font-semibold text-text-primary sm:text-sm">
+              <div className="flex items-center justify-between gap-2">
+                <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-accent">
+                  0{index + 1} · {node.tag}
+                </span>
+                {index < data.nodes.length - 1 && (
+                  <ArrowRight className="h-3 w-3 text-text-muted" aria-hidden="true" />
+                )}
+              </div>
+              <p className="mt-1.5 font-display text-sm font-semibold text-text-primary">
                 {node.title}
               </p>
-              {!compact && (
-                <p className="mt-1 text-xs leading-relaxed text-text-secondary">
-                  {node.subtitle}
-                </p>
-              )}
+              <p className="mt-1 text-xs leading-relaxed text-text-secondary">
+                {node.subtitle}
+              </p>
             </div>
-            {!compact && index < data.nodes.length - 1 && (
-              <ArrowRight
-                className="mt-2 hidden h-3.5 w-3.5 text-text-muted lg:block"
-                aria-hidden="true"
-              />
-            )}
           </div>
         ))}
       </div>
 
       {!compact && (
-        <p className="mt-3 flex items-center gap-1.5 text-xs text-text-muted">
-          <Database className="h-3.5 w-3.5 shrink-0 text-text-muted" aria-hidden="true" />
-          <span>{data.caption}</span>
+        <p className="mt-4 border-t border-border-subtle/70 pt-3 font-mono text-[11px] text-text-muted">
+          {data.caption}
         </p>
       )}
     </div>

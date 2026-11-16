@@ -72,24 +72,24 @@ export function DocumentModal({
       role="dialog"
       aria-modal="true"
       aria-labelledby={titleId}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-[#04060A]/85 p-3 backdrop-blur-sm sm:p-6"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-obsidian/90 p-3 backdrop-blur-md sm:p-6"
       onClick={(e) => {
         if (e.target === e.currentTarget) {
           onClose();
         }
       }}
     >
-      <div className="flex max-h-[94vh] w-full max-w-5xl flex-col overflow-hidden rounded-2xl border border-border-strong bg-bg-elevated shadow-panel">
-        <div className="flex flex-wrap items-start justify-between gap-3 border-b border-border-subtle px-4 py-3.5 sm:px-6">
+      <div className="flex max-h-[94vh] w-full max-w-5xl flex-col overflow-hidden rounded-2xl border border-white/15 bg-carbon shadow-atelierDark">
+        <div className="flex flex-wrap items-start justify-between gap-3 border-b border-white/10 px-4 py-4 sm:px-6">
           <div className="min-w-0 flex-1">
             {subtitle && (
-              <p className="font-mono text-xs uppercase tracking-wider text-accent">
+              <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-cobalt-soft">
                 {subtitle}
               </p>
             )}
             <h2
               id={titleId}
-              className="mt-0.5 font-display text-base font-semibold text-text-primary sm:text-lg"
+              className="mt-1 font-display text-base font-semibold text-white sm:text-lg"
             >
               {title}
             </h2>
@@ -99,18 +99,18 @@ export function DocumentModal({
             <button
               type="button"
               onClick={() => setZoomed((prev) => !prev)}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-border-strong bg-bg-card px-3 py-1.5 text-xs font-medium text-text-primary transition-colors hover:border-accent/50 hover:bg-bg-subtle"
+              className="inline-flex items-center gap-1.5 rounded-md border border-white/15 bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-white transition-colors hover:border-white/30"
               aria-pressed={zoomed}
             >
               {zoomed ? (
                 <>
-                  <ZoomOut className="h-3.5 w-3.5 text-accent" aria-hidden="true" />
-                  <span>Ajustar vista</span>
+                  <ZoomOut className="h-3.5 w-3.5 text-cobalt-soft" aria-hidden="true" />
+                  <span>Ajustar</span>
                 </>
               ) : (
                 <>
-                  <ZoomIn className="h-3.5 w-3.5 text-accent" aria-hidden="true" />
-                  <span>Ampliar zoom</span>
+                  <ZoomIn className="h-3.5 w-3.5 text-cobalt-soft" aria-hidden="true" />
+                  <span>Zoom</span>
                 </>
               )}
             </button>
@@ -119,18 +119,18 @@ export function DocumentModal({
               href={imagePath}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-lg border border-border-strong bg-bg-card px-3 py-1.5 text-xs font-medium text-text-primary transition-colors hover:border-accent/50 hover:bg-bg-subtle"
+              className="inline-flex items-center gap-1.5 rounded-md border border-white/15 bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-white transition-colors hover:border-white/30"
             >
-              <ExternalLink className="h-3.5 w-3.5 text-accent" aria-hidden="true" />
+              <ExternalLink className="h-3.5 w-3.5 text-cobalt-soft" aria-hidden="true" />
               <span className="hidden sm:inline">Abrir original</span>
             </a>
 
             <a
               href={imagePath}
               download={fileName}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-accent/40 bg-accent/15 px-3 py-1.5 text-xs font-medium text-text-primary transition-colors hover:bg-accent/25"
+              className="inline-flex items-center gap-1.5 rounded-md bg-cobalt px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-cobalt-hover"
             >
-              <Download className="h-3.5 w-3.5 text-accent" aria-hidden="true" />
+              <Download className="h-3.5 w-3.5" aria-hidden="true" />
               <span>Descargar</span>
             </a>
 
@@ -139,22 +139,21 @@ export function DocumentModal({
               type="button"
               onClick={onClose}
               aria-label="Cerrar visor del documento"
-              className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-border-strong bg-bg-card text-text-secondary transition-colors hover:border-border-strong hover:text-text-primary"
+              className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-white/15 bg-white/[0.04] text-editorial-muted transition-colors hover:text-white"
             >
               <X className="h-4 w-4" aria-hidden="true" />
             </button>
           </div>
         </div>
 
-        <div className="flex-1 overflow-auto bg-[#070A10] p-3 sm:p-5">
+        <div className="flex-1 overflow-auto bg-[#06080B] p-3 sm:p-5">
           <div className="flex min-h-full items-center justify-center">
-            {/* Imagen renderizada siempre sin recorte (object-contain) para conservar sellos y firmas completas */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={imagePath}
               alt={imageAlt}
               className={cn(
-                'rounded-lg border border-border-subtle bg-black/40 object-contain transition-all duration-200',
+                'rounded-lg border border-white/10 bg-black/40 object-contain transition-all duration-200',
                 zoomed
                   ? 'max-w-none w-[160%] sm:w-[135%] cursor-zoom-out'
                   : 'max-h-[62vh] w-auto max-w-full cursor-zoom-in'
@@ -165,17 +164,17 @@ export function DocumentModal({
         </div>
 
         {(issuer || dateLabel || signers.length > 0 || integrityNote) && (
-          <div className="space-y-2 border-t border-border-subtle bg-bg-elevated px-4 py-3.5 text-xs text-text-secondary sm:px-6">
+          <div className="space-y-1.5 border-t border-white/10 bg-carbon px-4 py-4 text-xs text-editorial-muted sm:px-6">
             {(issuer || dateLabel) && (
               <div className="flex flex-wrap gap-x-6 gap-y-1">
                 {issuer && (
                   <p>
-                    <span className="font-semibold text-text-primary">Emisor:</span> {issuer}
+                    <span className="font-semibold text-white">Emisor:</span> {issuer}
                   </p>
                 )}
                 {dateLabel && (
                   <p>
-                    <span className="font-semibold text-text-primary">Fecha / lugar:</span>{' '}
+                    <span className="font-semibold text-white">Fecha / lugar:</span>{' '}
                     {dateLabel}
                   </p>
                 )}
@@ -183,11 +182,11 @@ export function DocumentModal({
             )}
             {signers.length > 0 && (
               <p>
-                <span className="font-semibold text-text-primary">Firmas visibles:</span>{' '}
+                <span className="font-semibold text-white">Firmas visibles:</span>{' '}
                 {signers.join(' · ')}
               </p>
             )}
-            {integrityNote && <p className="text-text-muted">{integrityNote}</p>}
+            {integrityNote && <p className="text-editorial-muted/85">{integrityNote}</p>}
           </div>
         )}
       </div>

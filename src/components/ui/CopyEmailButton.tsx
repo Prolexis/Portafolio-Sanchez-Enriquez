@@ -8,12 +8,14 @@ interface CopyEmailButtonProps {
   email: string;
   className?: string;
   variant?: 'default' | 'compact';
+  tone?: 'dark' | 'light';
 }
 
 export function CopyEmailButton({
   email,
   className,
   variant = 'default',
+  tone = 'light',
 }: CopyEmailButtonProps) {
   const [copied, setCopied] = useState(false);
 
@@ -33,21 +35,24 @@ export function CopyEmailButton({
       onClick={handleCopy}
       aria-label={copied ? `Correo ${email} copiado` : `Copiar correo ${email}`}
       className={cn(
-        'inline-flex items-center justify-center gap-2 rounded-lg border border-border-strong bg-bg-card px-3.5 py-2 text-sm font-medium text-text-primary transition-colors hover:border-accent/50 hover:bg-bg-subtle',
-        variant === 'compact' && 'px-2.5 py-1.5 text-xs',
+        'inline-flex items-center justify-center gap-2 rounded-md border px-4 py-2.5 text-sm font-medium transition-colors',
+        tone === 'light'
+          ? 'border-editorial-borderLight bg-white text-ink hover:border-ink/35'
+          : 'border-white/20 bg-white/[0.04] text-white hover:border-white/40',
+        variant === 'compact' && 'px-3 py-1.5 text-xs',
         className
       )}
     >
       {copied ? (
         <>
-          <Check className="h-4 w-4 shrink-0 text-emerald-400" aria-hidden="true" />
+          <Check className="h-4 w-4 shrink-0 text-emerald-500" aria-hidden="true" />
           <span role="status" aria-live="polite">
             Correo copiado
           </span>
         </>
       ) : (
         <>
-          <Copy className="h-4 w-4 shrink-0 text-accent" aria-hidden="true" />
+          <Copy className="h-4 w-4 shrink-0 text-cobalt" aria-hidden="true" />
           <span>Copiar correo</span>
         </>
       )}

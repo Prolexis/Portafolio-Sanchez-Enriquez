@@ -18,17 +18,17 @@ export function ProjectVisualGallery({
 
   return (
     <>
-      <div className="grid gap-5 md:grid-cols-2">
+      <div className="grid gap-6 md:grid-cols-2">
         {visuals.map((visual) => (
           <figure
             key={visual.src}
-            className="surface-card overflow-hidden rounded-2xl p-3 sm:p-4"
+            className="obsidian-surface overflow-hidden rounded-xl p-3 sm:p-4"
           >
             <button
               type="button"
               onClick={() => setActiveVisual(visual)}
               aria-label={`Ampliar captura: ${visual.caption}`}
-              className="group relative flex aspect-[16/10] w-full items-center justify-center overflow-hidden rounded-xl border border-border-subtle bg-[#05070C]"
+              className="group relative flex aspect-[16/10] w-full items-center justify-center overflow-hidden rounded-lg border border-border-subtle bg-[#06080B]"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -36,7 +36,7 @@ export function ProjectVisualGallery({
                 alt={visual.alt}
                 className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-[1.015]"
               />
-              <span className="absolute right-2.5 top-2.5 inline-flex items-center gap-1 rounded-md border border-border-strong bg-bg/85 px-2 py-1 text-[11px] font-medium text-text-primary opacity-90 backdrop-blur-sm transition-opacity group-hover:opacity-100">
+              <span className="absolute right-2.5 top-2.5 inline-flex items-center gap-1 rounded border border-border-strong bg-bg/90 px-2.5 py-1 font-mono text-[11px] font-medium text-text-primary backdrop-blur-sm transition-colors group-hover:border-accent/50">
                 <Expand className="h-3 w-3 text-accent" aria-hidden="true" />
                 <span>Ampliar</span>
               </span>

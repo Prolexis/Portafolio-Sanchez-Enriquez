@@ -1,16 +1,20 @@
-export interface SpecialtyItem {
-  id: string;
-  label: string;
-  detail: string;
+export interface EditorialPillar {
+  number: string;
+  title: string;
+  description: string;
 }
 
 export interface ProfileConfig {
+  monogram: string;
   fullName: string;
   shortName: string;
-  brandLabel: string;
   handle: string;
-  headline: string;
-  subheadline: string;
+  heroEyebrow: string;
+  heroTitleLine1: string;
+  heroTitleLine2: string;
+  heroSubheadline: string;
+  heroAwardTag: string;
+  heroAwardText: string;
   university: string;
   faculty: string;
   career: string;
@@ -22,36 +26,27 @@ export interface ProfileConfig {
   portraitAlt: string;
   availabilityStatus: string;
   availabilityDetail: string;
-  /**
-   * Infraestructura lista para CV descargable futuro.
-   * Mantener en null mientras no exista un PDF real en /public/cv/.
-   */
   cvUrl: string | null;
-  specialties: SpecialtyItem[];
-  workPhilosophy: {
-    title: string;
-    description: string;
-  }[];
+  pillars: EditorialPillar[];
+  interests: string[];
   aboutNarrative: string[];
-  /**
-   * Estructura preparada para una futura extensión bilingüe (es/en)
-   * sin exponer botones inactivos en la interfaz actual.
-   */
-  i18nReady: {
-    activeLocale: 'es';
-    availableLocales: readonly ['es'];
-  };
+  contactHeadline: string;
+  contactSubheadline: string;
 }
 
 export const profile: ProfileConfig = {
+  monogram: 'CSE.',
   fullName: 'Cristhian Alexis Sánchez Enríquez',
   shortName: 'Cristhian Sánchez',
-  brandLabel: 'Cristhian Sánchez / Prolexis',
   handle: 'Prolexis',
-  headline: 'Software full-stack, IA aplicada y sistemas de datos con arquitectura verificable.',
-  subheadline:
-    'Estudiante de Ingeniería de Sistemas en la Universidad Nacional de Trujillo (UNT). Diseño e integro plataformas web, APIs tipadas, flujos de automatización e inteligencia artificial con foco en seguridad, trazabilidad y rigor técnico.',
-  university: 'Universidad Nacional de Trujillo (UNT)',
+  heroEyebrow: 'CRISTHIAN SÁNCHEZ / SOFTWARE & AI',
+  heroTitleLine1: 'Software con propósito.',
+  heroTitleLine2: 'Inteligencia aplicada.',
+  heroSubheadline:
+    'Soy Cristhian Alexis Sánchez Enríquez, estudiante de Ingeniería de Sistemas en la Universidad Nacional de Trujillo. Desarrollo aplicaciones, sistemas inteligentes y soluciones que responden a problemas reales.',
+  heroAwardTag: '03 / Premio nacional',
+  heroAwardText: '3.er lugar — Hackathon Syscoin 2026',
+  university: 'Universidad Nacional de Trujillo',
   faculty: 'Facultad de Ingeniería — Escuela Profesional de Ingeniería de Sistemas',
   career: 'Estudiante de Ingeniería de Sistemas',
   location: 'Trujillo, Perú',
@@ -60,56 +55,42 @@ export const profile: ProfileConfig = {
   linkedinUrl: 'https://www.linkedin.com/in/cristhian-alexis-sanchez-enriquez-a69808319/',
   portraitPath: '/assets/cristhian-sanchez-retrato.webp',
   portraitAlt: 'Retrato profesional de Cristhian Alexis Sánchez Enríquez',
-  availabilityStatus: 'Disponible para prácticas preprofesionales y roles junior',
+  availabilityStatus: 'Disponible para prácticas preprofesionales y proyectos de ingeniería',
   availabilityDetail:
-    'Desarrollo full-stack (Next.js, NestJS, FastAPI), integración de LLMs con reglas de negocio, análisis de datos y seguridad aplicada.',
+    'Desarrollo full-stack, APIs tipadas, integración aplicada de modelos de IA y sistemas de datos.',
   cvUrl: null,
-  specialties: [
+  pillars: [
     {
-      id: 'fullstack',
-      label: 'Full-Stack Web & APIs',
-      detail: 'Next.js, React, TypeScript, NestJS y FastAPI con validación estricta y arquitectura modular.',
+      number: '01',
+      title: 'Software Engineering',
+      description:
+        'Diseño y desarrollo de aplicaciones web, APIs y sistemas escalables.',
     },
     {
-      id: 'ai',
-      label: 'IA Aplicada & Explicabilidad',
-      detail: 'Orquestación con LLMs (Claude, Gemini), LangChain, copilotos con herramientas autorizadas y XAI con TreeSHAP.',
+      number: '02',
+      title: 'Artificial Intelligence',
+      description:
+        'Machine Learning, visión computacional y soluciones basadas en IA.',
     },
     {
-      id: 'data',
-      label: 'Datos & BI Transaccional',
-      detail: 'PostgreSQL, SQL Server (T-SQL, vistas, SP), Prisma, SQLAlchemy y tableros ejecutivos con KPIs auditables.',
-    },
-    {
-      id: 'security',
-      label: 'Seguridad & Trazabilidad',
-      detail: 'Análisis determinista sobre Active Directory (BloodHound), RBAC, auditoría append-only y evidencia criptográfica.',
+      number: '03',
+      title: 'Systems & Innovation',
+      description:
+        'Integración de tecnologías para resolver problemas empresariales, académicos y sociales.',
     },
   ],
-  workPhilosophy: [
-    {
-      title: 'Arquitectura antes que demos frágiles',
-      description:
-        'Cada proyecto separa la capa de interfaz de la lógica de negocio, la validación de entradas y el almacenamiento persistente o analítico.',
-    },
-    {
-      title: 'IA acotada a herramientas y evidencia',
-      description:
-        'Cuando integro modelos de lenguaje o ML (Claude, Gemini, Random Forest / TreeSHAP), restringo el acceso mediante esquemas tipados, reglas deterministas y explicabilidad.',
-    },
-    {
-      title: 'Honestidad sobre alcance y métricas',
-      description:
-        'Distingo claramente entre simulaciones académicas, pruebas experimentales y sistemas productivos, documentando limitaciones, avisos legales y pasos reales de ejecución.',
-    },
+  interests: [
+    'Arquitectura web full-stack y APIs tipadas',
+    'IA aplicada con trazabilidad y explicabilidad',
+    'Sistemas de datos, SQL Server y analítica operativa',
+    'Seguridad defensiva e integridad de identidades',
   ],
   aboutNarrative: [
-    'Me formo en Ingeniería de Sistemas en la Universidad Nacional de Trujillo (UNT), en Trujillo, Perú, construyendo proyectos que conectan desarrollo web full-stack, bases de datos relacionales e inteligencia artificial aplicada a problemas concretos.',
-    'Mi trabajo reciente abarca desde plataformas con trazabilidad criptográfica y visión multimodal para programas sociales (VasoChain AI), gemelos digitales 3D con XAI para minería (MineSafe 3D) y motores geoespaciales ante riesgo hidrometeorológico (YAKU ALERT UNT), hasta auditoría determinista de identidad en Active Directory (Identity Risk AI) e inteligencia comercial sobre SQL Server (Establo AI Leads).',
-    'En cada entrega priorizo código mantenible en TypeScript y Python, documentación clara en los repositorios y transparencia sobre qué se probó en laboratorio, qué fue trabajo colaborativo y cómo se valida cada sistema.',
+    'Estudio Ingeniería de Sistemas en la Universidad Nacional de Trujillo (UNT), en Trujillo, Perú. Mi enfoque combina desarrollo full-stack, modelado de datos e inteligencia artificial aplicada sobre problemas concretos.',
+    'He trabajado en soluciones que abarcan desde trazabilidad para programas sociales con verificación multimodal (VasoChainAI) y gemelos digitales explicables (MineSafe 3D), hasta plataformas geoespaciales ante lluvias extremas (YAKU ALERT UNT), auditoría determinista en Active Directory e inteligencia comercial sobre SQL Server.',
+    'Creo en construir software claro, honesto sobre su alcance y fácil de auditar en código.',
   ],
-  i18nReady: {
-    activeLocale: 'es',
-    availableLocales: ['es'],
-  },
+  contactHeadline: '¿Construimos algo que realmente importe?',
+  contactSubheadline:
+    'Si buscas colaboración técnica, prácticas preprofesionales o conversar sobre desarrollo de software e inteligencia artificial, escríbeme directamente.',
 };

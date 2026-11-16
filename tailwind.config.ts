@@ -9,35 +9,34 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: {
-          DEFAULT: '#090C12',
-          elevated: '#111722',
-          card: '#151C29',
-          subtle: '#1A2333',
+        carbon: '#101319',
+        obsidian: '#0B0D12',
+        ivory: '#F5F3EE',
+        stone: '#EAE9E5',
+        ink: '#1B2029',
+        cobalt: {
+          DEFAULT: '#3F63E8',
+          hover: '#3153D3',
+          soft: '#7399FF',
         },
-        text: {
-          primary: '#F4F7FB',
-          secondary: '#A6B0BF',
-          muted: '#7B879B',
-        },
-        accent: {
-          DEFAULT: '#6D9DFF',
-          hover: '#86B0FF',
-          violet: '#9786FF',
-        },
-        border: {
-          subtle: 'rgba(244, 247, 251, 0.08)',
-          strong: 'rgba(244, 247, 251, 0.16)',
+        editorial: {
+          muted: '#A8A8A3',
+          inkMuted: '#5B6270',
+          borderDark: '#232833',
+          borderLight: '#DCDAD3',
         },
       },
       fontFamily: {
         sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
-        display: ['var(--font-space-grotesk)', 'var(--font-inter)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-manrope)', 'var(--font-inter)', 'system-ui', 'sans-serif'],
         mono: ['var(--font-jetbrains-mono)', 'ui-monospace', 'SFMono-Regular', 'monospace'],
       },
+      maxWidth: {
+        atelier: '1320px',
+      },
       boxShadow: {
-        panel: '0 20px 50px -20px rgba(0, 0, 0, 0.65)',
-        glow: '0 0 0 1px rgba(109, 157, 255, 0.25), 0 18px 40px -18px rgba(109, 157, 255, 0.22)',
+        atelier: '0 24px 60px -28px rgba(11, 13, 18, 0.28)',
+        atelierDark: '0 24px 64px -28px rgba(0, 0, 0, 0.72)',
       },
     },
   },

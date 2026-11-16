@@ -5,7 +5,7 @@ import { ProjectsExplorer } from '@/components/projects/ProjectsExplorer';
 
 export const metadata: Metadata = {
   title: 'Proyectos y Casos de Estudio',
-  description: `Catálogo técnico de ${flagshipProjects.length} casos de estudio principales y ${secondaryProjects.length} repositorios complementarios de ${profile.brandLabel}.`,
+  description: `Catálogo editorial de ${flagshipProjects.length} casos de estudio principales y ${secondaryProjects.length} repositorios complementarios de ${profile.fullName}.`,
   alternates: {
     canonical: '/proyectos',
   },
@@ -13,22 +13,23 @@ export const metadata: Metadata = {
 
 export default function ProyectosPage() {
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-      <header className="max-w-3xl">
-        <p className="font-mono text-xs uppercase tracking-wider text-accent">
-          Catálogo técnico · /{profile.handle}
-        </p>
-        <h1 className="mt-2 font-display text-3xl font-semibold tracking-tight text-text-primary sm:text-4xl">
-          Proyectos y casos de estudio
-        </h1>
-        <p className="mt-3 text-base leading-relaxed text-text-secondary">
-          Selección de sistemas en ingeniería web, inteligencia artificial aplicada, seguridad en
-          Active Directory, analítica sobre SQL Server y prototipos de hackathon. Cada ficha distingue
-          claramente el entorno de prueba, las tecnologías verificadas y los repositorios en GitHub.
-        </p>
-      </header>
+    <div className="bg-ivory text-ink">
+      <div className="bg-carbon py-14 text-white sm:py-16">
+        <div className="atelier-container">
+          <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-cobalt-soft">
+            Archivo de ingeniería · github.com/{profile.handle}
+          </p>
+          <h1 className="atelier-section-title mt-3 font-display font-semibold text-white">
+            Proyectos seleccionados.
+          </h1>
+          <p className="mt-3 max-w-2xl text-base leading-relaxed text-editorial-muted">
+            Soluciones de software, inteligencia artificial, analítica SQL y ciberseguridad con
+            código abierto y evidencia verificable.
+          </p>
+        </div>
+      </div>
 
-      <div className="mt-10">
+      <div className="atelier-container py-12 sm:py-16">
         <ProjectsExplorer />
       </div>
     </div>
