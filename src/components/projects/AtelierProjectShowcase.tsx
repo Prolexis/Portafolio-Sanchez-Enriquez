@@ -184,17 +184,17 @@ export function AtelierProjectShowcase({
       {(mineSafe || yakuAlert) && (
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
           {mineSafe && (
-            <article className="group flex min-w-0 flex-col justify-between rounded-2xl bg-carbon p-5 text-white shadow-editorialDark sm:p-8 lg:col-span-7">
+            <article className="group flex min-w-0 flex-col justify-between rounded-2xl bg-white p-5 shadow-editorialLight sm:p-8 lg:col-span-7">
               <div>
                 <ProjectCover project={mineSafe} />
                 <div className="mt-6 flex items-center gap-3">
                   <span className="font-mono text-sm font-semibold text-cobalt">
                     {mineSafe.indexLabel}
                   </span>
-                  <span className="h-px w-5 bg-ruleDark" aria-hidden="true" />
-                  <span className="text-xs text-mutedDark">{mineSafe.editorialSubtitle}</span>
+                  <span className="h-px w-5 bg-ruleLight" aria-hidden="true" />
+                  <span className="text-xs text-mutedLight">{mineSafe.editorialSubtitle}</span>
                 </div>
-                <h3 className="type-h3 mt-3 font-display font-semibold text-white">
+                <h3 className="type-h3 mt-3 font-display font-semibold text-ink">
                   <Link
                     href={`/proyectos/${mineSafe.slug}`}
                     className="transition-colors hover:text-cobalt"
@@ -202,38 +202,21 @@ export function AtelierProjectShowcase({
                     {mineSafe.name}
                   </Link>
                 </h3>
-                <p className="mt-2.5 text-sm leading-relaxed text-mutedDark sm:text-base">
+                <p className="mt-2.5 text-sm leading-relaxed text-mutedLight sm:text-base">
                   {mineSafe.tagline}
                 </p>
                 <div className="mt-5 flex flex-wrap gap-2">
                   {mineSafe.previewTags.slice(0, 3).map((tag) => (
                     <span
                       key={tag}
-                      className="rounded bg-white/[0.07] px-2.5 py-1 text-xs font-medium text-white"
+                      className="rounded bg-ivory px-2.5 py-1 text-xs font-medium text-ink"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
               </div>
-              <div className="mt-6 flex flex-wrap items-center gap-6 border-t border-ruleDark pt-5">
-                <Link
-                  href={`/proyectos/${mineSafe.slug}`}
-                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-white transition-colors hover:text-cobalt"
-                >
-                  <span>Ver caso de estudio</span>
-                  <ArrowUpRight className="h-4 w-4 text-cobalt" aria-hidden="true" />
-                </Link>
-                <a
-                  href={mineSafe.repoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs font-medium text-mutedDark transition-colors hover:text-white"
-                >
-                  <GitBranch className="h-3.5 w-3.5 text-cobalt" aria-hidden="true" />
-                  <span>Repositorio</span>
-                </a>
-              </div>
+              <ProjectLinks project={mineSafe} />
             </article>
           )}
 

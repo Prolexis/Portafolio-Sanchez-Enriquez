@@ -142,11 +142,11 @@ export function ProjectCoverIllustration({ kind }: { kind: CoverVisualKind }) {
       <div className="relative flex aspect-[16/10] w-full flex-col justify-between overflow-hidden rounded-lg bg-[#E9ECEF] p-5 text-ink sm:p-6">
         <div className="flex items-center justify-between gap-2">
           <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-ink">
-            <CloudRain className="h-4 w-4 text-cobalt" aria-hidden="true" />
-            <span>YAKU ALERT · Monitoreo Trujillo & UNT</span>
+            <CloudRain className="h-4 w-4 shrink-0 text-cobalt" aria-hidden="true" />
+            <span>YAKU ALERT · Trujillo & UNT</span>
           </span>
-          <span className="font-mono text-[10px] text-mutedLight">
-            Ilustración conceptual · Mapa
+          <span className="shrink-0 font-mono text-[10px] text-mutedLight">
+            Ilustración conceptual
           </span>
         </div>
 
@@ -184,7 +184,7 @@ export function ProjectCoverIllustration({ kind }: { kind: CoverVisualKind }) {
             <p className="text-[11px] leading-relaxed text-mutedLight">
               Corredores hídricos y escenarios diferenciados de pronóstico.
             </p>
-            <span className="inline-block rounded bg-ivory px-2 py-1 font-mono text-[10px] text-ink">
+            <span className="inline-block whitespace-nowrap rounded bg-ivory px-2 py-1 font-mono text-[10px] text-ink">
               Ley N.° 29664
             </span>
           </div>

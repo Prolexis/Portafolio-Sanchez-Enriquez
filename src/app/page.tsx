@@ -108,7 +108,7 @@ export default function HomePage() {
 
                 <Link
                   href="/logros"
-                  className="group mt-5 flex items-start gap-2.5 border-t border-ruleDark pt-4 text-xs text-mutedDark transition-colors hover:text-white"
+                  className="group mt-5 flex items-start gap-2.5 border-t border-ruleDark pt-4 text-xs text-white/85 transition-colors hover:text-white"
                 >
                   <Award className="mt-0.5 h-4 w-4 shrink-0 text-cobalt" aria-hidden="true" />
                   <span className="leading-relaxed">{profile.heroAwardText}</span>
